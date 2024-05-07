@@ -1,0 +1,8 @@
+.secondary_btn{
+    -fx-background-color: #f0f0f0;
+    -fx-text-fill: #000000;
+}
+
+.secondary_btn:hover{
+    -fx-background-color: #e0e0e0;
+}
