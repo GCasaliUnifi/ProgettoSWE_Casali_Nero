@@ -37,6 +37,9 @@ public class SignUp {
             System.out.println("Errore: il numero di cellulare non è valido.");
             return;
         }
+        //cifratura della password
+        SecurePassword securePassword = new SecurePassword(password);
+        password = securePassword.getSecurePassword();
         //controlla che l'email o il numero di cellulare non siano già presenti nel database
         try{
             PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM user WHERE email = ? OR cellphone = ?");

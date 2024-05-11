@@ -22,6 +22,9 @@ public class SignIn{
             System.out.println("Errore: l'email non è valida.");
             return;
         }
+        //cifratura della password
+        SecurePassword securePassword = new SecurePassword(password);
+        password = securePassword.getSecurePassword();
         //controlla che l'email e la password siano presenti nel database
         try{
             PreparedStatement preparedStatement = DatabaseConnection.getConnection().prepareStatement("SELECT * FROM user WHERE email = ? AND psw = ?");
