@@ -31,6 +31,14 @@ public class LogIn extends ViewInterface {
                 controller.onLogin(email.getText(), psw.getText());
             }
         });
+
+        registrati.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new Registrazione(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     public LogIn(Controller c, Stage stage) {

@@ -11,10 +11,16 @@ import java.io.IOException;
 public class Controller {
     private Utente utente;
     private ViewInterface viewAttuale;
+    private Stage stage;
 
     public Controller(Stage stage) throws Exception {
         this.utente = null;
-        this.viewAttuale = new LogIn(this, stage);
+        this.stage = stage;
+        setViewAttuale(new LogIn(this, stage));
+    }
+
+    public void setViewAttuale(ViewInterface view) throws Exception {
+        this.viewAttuale = view;
         try {
             viewAttuale.display();
         } catch (IOException e) {
