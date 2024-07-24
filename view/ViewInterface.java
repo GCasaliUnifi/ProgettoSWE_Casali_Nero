@@ -5,7 +5,9 @@ import javafx.stage.Stage;
 
 import controller.Controller;
 
-public class ViewInterface {
+import java.io.IOException;
+
+public abstract class ViewInterface {
     protected Controller controller;
     protected String title;
     protected String fxmlPath;
@@ -21,15 +23,5 @@ public class ViewInterface {
         this.fxmlPath = fxmlPath;
     }
 
-//    public static void init(String[] args) throws Exception {
-//        launch(args);
-//    }
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        stage = primaryStage;
-//
-//    }
-
-    public void display() throws Exception {}
+    public abstract void display() throws IOException;
 }

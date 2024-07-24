@@ -10,17 +10,13 @@ import java.io.IOException;
 
 public class LogIn extends ViewInterface {
 
-    public LogIn() {
-        super(null, null, null);
-    }
-
     public LogIn(Controller c, Stage stage) {
         super(c, "LogIn", "fxml/SignIn.fxml");
         ViewInterface.stage = stage;
     }
 
     @Override
-    public void display() {
+    public void display() throws IOException{
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
             loader.setController(this);
@@ -29,8 +25,8 @@ public class LogIn extends ViewInterface {
             stage.setScene(scene);
             stage.setTitle(title);
             stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new IOException("Errore nel caricamento della finestra di login");
         }
     }
 }
