@@ -1,4 +1,4 @@
 package dao;
 
-public class LicenzaDAO implements BaseDAO {
+public class LicenzaDAO extends BaseDAO {
 }

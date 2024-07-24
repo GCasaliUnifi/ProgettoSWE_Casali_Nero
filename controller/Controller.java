@@ -1,5 +1,6 @@
 package controller;
 
+import dao.UtenteDAO;
 import javafx.stage.Stage;
 import model.Utente;
 import view.LogIn;
@@ -18,6 +19,16 @@ public class Controller {
             viewAttuale.display();
         } catch (IOException e) {
             throw new Exception("Errore nel caricamento della finestra di login");
+        }
+    }
+
+    public void onLogin(String email, String password) {
+        utente = new Utente(email, password);
+        UtenteDAO utenteDAO = new UtenteDAO(this.utente);
+        if(utenteDAO.tryLogin()) {
+            System.out.println("Login effettuato!");
+        } else {
+            System.out.println("Email o password errati!");
         }
     }
 }

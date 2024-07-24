@@ -1,14 +1,37 @@
 package view;
 
 import controller.Controller;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class LogIn extends ViewInterface {
+
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField psw;
+    @FXML
+    private Button accedi;
+    @FXML
+    private Button registrati;
+
+    @FXML
+    public void initialize() {
+        accedi.setOnAction(event -> {
+            if(email.getText().isEmpty() || psw.getText().isEmpty()) {
+                System.out.println("Errore: uno o più campi sono vuoti!");
+            } else {
+                controller.onLogin(email.getText(), psw.getText());
+            }
+        });
+    }
 
     public LogIn(Controller c, Stage stage) {
         super(c, "LogIn", "fxml/SignIn.fxml");

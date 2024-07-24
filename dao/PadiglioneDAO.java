@@ -1,4 +1,4 @@
 package dao;
 
-public class PadiglioneDAO implements BaseDAO{
+public class PadiglioneDAO extends BaseDAO{
 }

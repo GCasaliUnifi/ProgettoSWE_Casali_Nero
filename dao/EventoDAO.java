@@ -1,4 +1,4 @@
 package dao;
 
-public class EventoDAO implements BaseDAO {
+public class EventoDAO extends BaseDAO {
 }
