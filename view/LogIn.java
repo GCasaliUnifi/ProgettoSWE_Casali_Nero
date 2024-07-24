@@ -10,10 +10,6 @@ import java.io.IOException;
 
 public class LogIn extends ViewInterface {
 
-    public LogIn() {
-        super(null, null, null);
-    }
-
     public LogIn(Controller c, Stage stage) {
         super(c, "LogIn", "fxml/SignIn.fxml");
         ViewInterface.stage = stage;

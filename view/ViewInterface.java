@@ -21,15 +21,5 @@ public class ViewInterface {
         this.fxmlPath = fxmlPath;
     }
 
-//    public static void init(String[] args) throws Exception {
-//        launch(args);
-//    }
-//
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        stage = primaryStage;
-//
-//    }
-
     public void display() throws Exception {}
 }
