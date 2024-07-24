@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.stage.Stage;
 import model.Utente;
 import view.LogIn;
 import view.ViewInterface;
@@ -10,17 +11,13 @@ public class Controller {
     private Utente utente;
     private ViewInterface viewAttuale;
 
-    public Controller() throws Exception {
+    public Controller(Stage stage) throws Exception {
         this.utente = null;
-        this.viewAttuale = new LogIn(this);
+        this.viewAttuale = new LogIn(this, stage);
         try {
             viewAttuale.display();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void init() {
-        this.viewAttuale = new LogIn(this);
     }
 }
