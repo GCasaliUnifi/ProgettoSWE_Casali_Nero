@@ -3,6 +3,7 @@ package controller;
 import dao.UtenteDAO;
 import javafx.stage.Stage;
 import model.Utente;
+import view.Home;
 import view.LogIn;
 import view.ViewInterface;
 
@@ -33,6 +34,11 @@ public class Controller {
         UtenteDAO utenteDAO = new UtenteDAO(this.utente);
         if(utenteDAO.tryLogin()) {
             System.out.println("Login effettuato!");
+            try {
+                this.setViewAttuale(new Home(this, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         } else {
             System.out.println("Email o password errati!");
         }
