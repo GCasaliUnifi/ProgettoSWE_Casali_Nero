@@ -4,6 +4,7 @@ public class Utente {
     private int id;
     private String nome;
     private String cognome;
+    private String telefono;
     private String eMail;
     private String password;
     private int type;
@@ -23,6 +24,10 @@ public class Utente {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public void seteMail(String eMail) {
@@ -47,6 +52,10 @@ public class Utente {
 
     public String getCognome() {
         return cognome;
+    }
+
+    public String getTelefono() {
+        return telefono;
     }
 
     public String geteMail() {

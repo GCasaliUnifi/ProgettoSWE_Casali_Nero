@@ -42,7 +42,6 @@ public class UtenteDAO extends BaseDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE email = ? AND psw = ?");
                 preparedStatement.setString(1, utente.geteMail());
                 preparedStatement.setString(2, getSecurePassword());
-//                preparedStatement.setString(2, utente.getPassword());
                 if(preparedStatement.executeQuery().next()) {
                     return true;
                 } else {
@@ -50,6 +49,35 @@ public class UtenteDAO extends BaseDAO {
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean tryRegister() {
+        if(utente != null) {
+            try{
+                Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM user where email = ?");
+                preparedStatement.setString(1, utente.geteMail());
+                if(preparedStatement.executeQuery().next()) {
+                    return false;
+                } else {
+                    preparedStatement = connection.prepareStatement("INSERT INTO user(firstName, lastName, email, cellphone, psw, type) values (?, ?, ?, ?, ?, 0)");
+                    preparedStatement.setString(1, utente.getNome());
+                    preparedStatement.setString(2, utente.getCognome());
+                    preparedStatement.setString(3, utente.geteMail());
+                    preparedStatement.setString(4, utente.getTelefono());
+                    preparedStatement.setString(5, getSecurePassword());
+
+                    if(preparedStatement.executeUpdate() > 0) {
+                        return true;
+                    } else {
+                        throw new Exception("Errore durante l'inserimento");
+                    }
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
         }
         return false;

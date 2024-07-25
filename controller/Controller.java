@@ -37,4 +37,22 @@ public class Controller {
             System.out.println("Email o password errati!");
         }
     }
+
+    public void onRegister(String firstName, String lastName, String cellphone, String email, String passwd) {
+        utente = new Utente(email, passwd);
+        utente.setNome(firstName);
+        utente.setCognome(lastName);
+        utente.setTelefono(cellphone);
+        UtenteDAO utenteDAO = new UtenteDAO(this.utente);
+        if(utenteDAO.tryRegister()) {
+            System.out.println("Registrazione effettuata con successo!");
+            try {
+                this.setViewAttuale(new LogIn(this, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Errore: mail già presente, usare un'altra mail!");
+        }
+    }
 }
