@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public abstract class BaseDAO {
+public class DataBaseConnector {
     private static final String USER = "root";
     private static final String PASSWORD = "";
     private static final String URL = "localhost:3306/gestionale_swe";

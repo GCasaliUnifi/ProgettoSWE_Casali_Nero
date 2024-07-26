@@ -1,4 +1,4 @@
 package dao;
 
-public class EventoDAO extends BaseDAO {
+public class EventoDAO extends DataBaseConnector {
 }

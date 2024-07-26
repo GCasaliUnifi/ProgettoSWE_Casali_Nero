@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import javax.swing.text.View;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -61,7 +62,11 @@ public class Registrazione extends ViewInterface {
                 if (!psw.getText().equals(pswConfirm.getText())) {
                     System.out.println("Le password non coincidono.");
                 } else {
-                    controller.onRegister(firstName.getText(), lastName.getText(), cellphone.getText(), email.getText(), psw.getText());
+                    try {
+                        controller.onRegister(firstName.getText(), lastName.getText(), cellphone.getText(), email.getText(), psw.getText());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });

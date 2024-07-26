@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LogIn extends ViewInterface {
 
@@ -28,7 +29,11 @@ public class LogIn extends ViewInterface {
             if(email.getText().isEmpty() || psw.getText().isEmpty()) {
                 System.out.println("Errore: uno o più campi sono vuoti!");
             } else {
-                controller.onLogin(email.getText(), psw.getText());
+                try {
+                    controller.onLogin(email.getText(), psw.getText());
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

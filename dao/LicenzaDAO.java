@@ -1,4 +1,4 @@
 package dao;
 
-public class LicenzaDAO extends BaseDAO {
+public class LicenzaDAO extends DataBaseConnector {
 }
