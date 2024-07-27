@@ -60,7 +60,7 @@ public class Controller {
         try {
             viewAttuale.display();
         } catch (IOException e) {
-            throw new Exception("Errore nel caricamento della finestra di login");
+            throw new Exception("Errore nel caricamento della finestra");
         }
     }
 

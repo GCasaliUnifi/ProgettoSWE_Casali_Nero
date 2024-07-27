@@ -86,8 +86,8 @@
               </content>
             </TitledPane>
             <Line endX="-100.0" endY="185.0" layoutX="506.0" layoutY="189.0" startX="-100.0" startY="-186.0" />
-            <Button id="btnRichiediLicenza" layoutX="427.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Richiedi Licenza" />
-            <Button id="btnLogOut" layoutX="427.0" layoutY="335.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Log Out" />
+            <Button fx:id="btnRichiediLicenza" layoutX="427.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Richiedi Licenza" />
+            <Button fx:id="btnLogOut" layoutX="427.0" layoutY="335.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Log Out" />
             <Label layoutX="427.0" layoutY="15.0" prefHeight="19.0" prefWidth="105.0" text="Codice Licenza : " />
             <Label id="codiceLicenza" layoutX="532.0" layoutY="16.0" prefHeight="18.0" prefWidth="98.0" />
             <Label layoutX="427.0" layoutY="43.0" prefHeight="19.0" prefWidth="98.0" text="Scadenza :" />

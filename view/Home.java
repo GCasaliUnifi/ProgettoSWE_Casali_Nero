@@ -12,6 +12,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Home extends ViewInterface {
+    @FXML
+    private Button btnAggiungiPadiglione;
+
+    @FXML
+    public void initialize() {
+        btnAggiungiPadiglione.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new AggiungiPadiglione(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
     public Home(Controller c, Stage stage) {
         super(c, "Dashboard", c.isAmministratore() ? "fxml/DashboardImpiegatoC.fxml" : "fxml/DashboardCittadino.fxml");
         ViewInterface.stage = stage;
