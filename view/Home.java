@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Home extends ViewInterface {
     public Home(Controller c, Stage stage) {
-        super(c, "Dashboard", "fxml/Dashboard.fxml");
+        super(c, "Dashboard", c.isAmministratore() ? "fxml/DashboardImpiegatoC.fxml" : "fxml/DashboardCittadino.fxml");
         ViewInterface.stage = stage;
     }
 

@@ -2,6 +2,8 @@ package controller;
 
 import dao.UtenteDAOImpl;
 import dao.UtenteDAO;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import model.Utente;
 import view.Home;
@@ -13,6 +15,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class Controller {
     private Utente utente;
@@ -44,6 +48,13 @@ public class Controller {
         return generatedPsw;
     }
 
+    private void alert(AlertType type,String message) {
+        Alert warningAlert = new Alert(type, message);
+        warningAlert.setTitle("Attenzione!");
+        warningAlert.setHeaderText(null);
+        warningAlert.showAndWait();
+    }
+
     public void setViewAttuale(ViewInterface view) throws Exception {
         this.viewAttuale = view;
         try {
@@ -60,6 +71,7 @@ public class Controller {
         if(u != null) {
             if(u.getPassword().equals(utente.getPassword())) {
                 System.out.println("Login effettuato!");
+                this.utente = u;
                 try {
                     this.setViewAttuale(new Home(this, stage));
                 } catch (Exception e) {
@@ -67,9 +79,11 @@ public class Controller {
                 }
             } else {
                 System.out.println("Email o password errati!");
+                this.alert(AlertType.WARNING,"Email o password errati!");
             }
         } else {
             System.out.println("Email o password errati!");
+            this.alert(AlertType.WARNING, "Email o password errati!");
         }
     }
 
@@ -93,6 +107,11 @@ public class Controller {
             }
         } else {
             System.out.println("Errore: mail già presente, usare un'altra mail!");
+            this.alert(AlertType.ERROR, "Errore: mail già presente, usare un'altra mail!");
         }
+    }
+
+    public boolean isAmministratore() {
+        return (utente.getType() == 1);
     }
 }
