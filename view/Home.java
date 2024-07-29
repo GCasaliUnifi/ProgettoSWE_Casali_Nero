@@ -17,13 +17,18 @@ public class Home extends ViewInterface {
 
     @FXML
     public void initialize() {
-        btnAggiungiPadiglione.setOnAction(event -> {
-            try {
-                controller.setViewAttuale(new AggiungiPadiglione(this.controller, stage));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        });
+        if(this.controller.isAmministratore()) {
+            btnAggiungiPadiglione.setOnAction(event -> {
+                try {
+                    controller.setViewAttuale(new AggiungiPadiglione(this.controller, stage));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        } else {
+            //TODO: Implementare la funzionalità per il cittadino
+        }
+
     }
 
     public Home(Controller c, Stage stage) {

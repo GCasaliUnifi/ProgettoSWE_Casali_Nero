@@ -49,9 +49,9 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
               <items>
-                <MenuItem id="menuHome" mnemonicParsing="false" text="Home" />
-                  <MenuItem id="menuEventi" mnemonicParsing="false" text="Lista Eventi" />
-                  <MenuItem id="menuPadiglioni" mnemonicParsing="false" text="Lista Padiglioni" />
+                <MenuItem fx:id="menuHome" mnemonicParsing="false" text="Home" />
+                  <MenuItem fx:id="menuEventi" mnemonicParsing="false" text="Lista Eventi" />
+                  <MenuItem fx:id="menuPadiglioni" mnemonicParsing="false" text="Lista Padiglioni" />
               </items>
             </Menu>
          </menus>
@@ -62,7 +62,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane id="listaBigliettiAcquistati" prefHeight="345.0" prefWidth="202.0">
+                        <ScrollPane fx:id="listaBigliettiAcquistati" prefHeight="345.0" prefWidth="202.0">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                           </content>
@@ -76,7 +76,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ScrollPane id="listaPadiglioniAffittati" prefHeight="346.0" prefWidth="202.0">
+                        <ScrollPane fx:id="listaPadiglioniAffittati" prefHeight="346.0" prefWidth="202.0">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
                           </content>
@@ -89,9 +89,9 @@
             <Button fx:id="btnRichiediLicenza" layoutX="427.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Richiedi Licenza" />
             <Button fx:id="btnLogOut" layoutX="427.0" layoutY="335.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Log Out" />
             <Label layoutX="427.0" layoutY="15.0" prefHeight="19.0" prefWidth="105.0" text="Codice Licenza : " />
-            <Label id="codiceLicenza" layoutX="532.0" layoutY="16.0" prefHeight="18.0" prefWidth="98.0" />
+            <Label fx:id="codiceLicenza" layoutX="532.0" layoutY="16.0" prefHeight="18.0" prefWidth="98.0" />
             <Label layoutX="427.0" layoutY="43.0" prefHeight="19.0" prefWidth="98.0" text="Scadenza :" />
-            <Label id="scadenzaLicenza" layoutX="523.0" layoutY="44.0" prefHeight="18.0" prefWidth="98.0" />
+            <Label fx:id="scadenzaLicenza" layoutX="523.0" layoutY="44.0" prefHeight="18.0" prefWidth="98.0" />
          </children>
     </AnchorPane>
   </children>

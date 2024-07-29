@@ -47,9 +47,9 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
               <items>
-                <MenuItem id="menuHome" mnemonicParsing="false" text="Home" />
-                  <MenuItem id="menuEventi" mnemonicParsing="false" text="Lista Eventi" />
-                  <MenuItem id="menuPadiglioni" mnemonicParsing="false" text="Lista Padiglioni" />
+                <MenuItem fx:id="menuHome" mnemonicParsing="false" text="Home" />
+                  <MenuItem fx:id="menuEventi" mnemonicParsing="false" text="Lista Eventi" />
+                  <MenuItem fx:id="menuPadiglioni" mnemonicParsing="false" text="Lista Padiglioni" />
               </items>
             </Menu>
          </menus>
@@ -62,7 +62,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <ListView id="listaLicenze" layoutX="-1.0" prefHeight="320.0" prefWidth="348.0" />
+                        <ListView fx:id="listaLicenze" layoutX="-1.0" prefHeight="320.0" prefWidth="348.0" />
                      </children>
                   </AnchorPane>
               </content>

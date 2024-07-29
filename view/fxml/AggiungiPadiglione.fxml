@@ -47,9 +47,9 @@
          <menus>
             <Menu mnemonicParsing="false" text="Menu">
               <items>
-                <MenuItem id="menuHome" mnemonicParsing="false" text="Home" />
-                  <MenuItem id="menuEventi" mnemonicParsing="false" text="Lista Eventi" />
-                  <MenuItem id="menuPadiglioni" mnemonicParsing="false" text="Lista Padiglioni" />
+                <MenuItem fx:id="menuHome" mnemonicParsing="false" text="Home" />
+                  <MenuItem fx:id="menuEventi" mnemonicParsing="false" text="Lista Eventi" />
+                  <MenuItem fx:id="menuPadiglioni" mnemonicParsing="false" text="Lista Padiglioni" />
               </items>
             </Menu>
          </menus>
@@ -58,10 +58,10 @@
          <children>
             <Label layoutX="110.0" layoutY="48.0" text="Codice Padiglione :" />
             <Label layoutX="54.0" layoutY="83.0" text="Dimensioni Padiglione (mq):" />
-            <TextField id="codePadiglione" layoutX="239.0" layoutY="44.0" promptText="P_01" />
-            <TextField id="dimPadiglione" layoutX="239.0" layoutY="79.0" promptText="45.0" />
-            <Button id="btnConfirm" layoutX="276.0" layoutY="137.0" mnemonicParsing="false" text="Conferma" />
-            <Button id="btnCancel" layoutX="276.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Annulla" />
+            <TextField fx:id="codePadiglione" layoutX="239.0" layoutY="44.0" promptText="P_01" />
+            <TextField fx:id="dimPadiglione" layoutX="239.0" layoutY="79.0" promptText="45.0" />
+            <Button fx:id="btnConfirm" layoutX="276.0" layoutY="137.0" mnemonicParsing="false" text="Conferma" />
+            <Button fx:id="btnCancel" layoutX="276.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Annulla" />
          </children>
     </AnchorPane>
   </children>
