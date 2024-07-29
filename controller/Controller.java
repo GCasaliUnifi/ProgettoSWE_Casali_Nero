@@ -1,10 +1,13 @@
 package controller;
 
+import dao.PadiglioneDAO;
+import dao.PadiglioneDAOImpl;
 import dao.UtenteDAOImpl;
 import dao.UtenteDAO;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import model.Padiglione;
 import model.Utente;
 import view.Home;
 import view.LogIn;
@@ -48,7 +51,7 @@ public class Controller {
         return generatedPsw;
     }
 
-    private void alert(AlertType type,String message) {
+    public void alert(AlertType type,String message) {
         Alert warningAlert = new Alert(type, message);
         warningAlert.setTitle("Attenzione!");
         warningAlert.setHeaderText(null);
@@ -113,5 +116,25 @@ public class Controller {
 
     public boolean isAmministratore() {
         return (utente.getType() == 1);
+    }
+
+    public void onAddPadiglione(String codice, float dimensione) throws SQLException {
+        Padiglione padiglione = new Padiglione(codice, dimensione);
+        PadiglioneDAO padiglioneDAO = new PadiglioneDAOImpl();
+        Padiglione p = padiglioneDAO.readPadiglione(codice);
+
+        if(p == null) {
+            if(padiglioneDAO.createPadiglione(padiglione)) {
+                System.out.println("Padiglione aggiunto con successo!");
+                try {
+                    this.setViewAttuale(new Home(this, stage));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            System.out.println("Errore: codice padiglione già presente!");
+            this.alert(AlertType.ERROR, "Errore: codice padiglione già presente!");
+        }
     }
 }
