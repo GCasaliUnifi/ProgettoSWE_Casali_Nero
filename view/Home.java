@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
@@ -14,9 +15,19 @@ import java.io.IOException;
 public class Home extends ViewInterface {
     @FXML
     private Button btnAggiungiPadiglione;
+    @FXML
+    private MenuItem menuPadiglioni;
 
     @FXML
     public void initialize() {
+        menuPadiglioni.setOnAction(event -> {
+            try{
+                controller.setViewAttuale(new ListaPadiglioni(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         if(this.controller.isAmministratore()) {
             btnAggiungiPadiglione.setOnAction(event -> {
                 try {

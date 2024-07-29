@@ -18,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -135,6 +137,18 @@ public class Controller {
         } else {
             System.out.println("Errore: codice padiglione già presente!");
             this.alert(AlertType.ERROR, "Errore: codice padiglione già presente!");
+        }
+    }
+
+    public ArrayList<Padiglione> getListaPadiglioni() throws SQLException {
+        PadiglioneDAO padiglioneDAO = new PadiglioneDAOImpl();
+        ArrayList<Padiglione> lista;
+        lista = padiglioneDAO.readAllPadiglioni();
+
+        if(!lista.isEmpty()) {
+            return lista;
+        } else {
+            return null;
         }
     }
 }

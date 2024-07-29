@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PadiglioneDAOImpl extends DataBaseConnector implements PadiglioneDAO {
 
@@ -45,6 +46,27 @@ public class PadiglioneDAOImpl extends DataBaseConnector implements PadiglioneDA
             if(rs.next()) {
                 return new Padiglione(rs.getString("codice"), rs.getFloat("dimensione"));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public ArrayList<Padiglione> readAllPadiglioni() throws SQLException {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from padiglione");
+            ResultSet rs = preparedStatement.executeQuery();
+            ArrayList<Padiglione> padiglioni = new ArrayList<>();
+            while(rs.next()) {
+                Padiglione p = new Padiglione(rs.getString("codice"), rs.getFloat("dimensione"));
+                p.setId(rs.getInt("id"));
+                padiglioni.add(p);
+            }
+
+            return padiglioni;
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
