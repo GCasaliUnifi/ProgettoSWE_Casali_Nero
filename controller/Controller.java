@@ -1,12 +1,10 @@
 package controller;
 
-import dao.PadiglioneDAO;
-import dao.PadiglioneDAOImpl;
-import dao.UtenteDAOImpl;
-import dao.UtenteDAO;
+import dao.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import model.Evento;
 import model.Padiglione;
 import model.Utente;
 import view.Home;
@@ -19,6 +17,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -167,6 +166,26 @@ public class Controller {
             System.out.println("Errore: codice padiglione già presente!");
             this.alert(AlertType.ERROR, "Errore: codice padiglione già presente!");
             return false;
+        }
+    }
+
+    public void onAddEvento(String codice, String nome, String data, String descrizione) throws SQLException {
+        Evento evento = new Evento(codice, nome, data, descrizione);
+        EventoDAO eventoDAO = new EventoDAOImpl();
+        Evento ev = eventoDAO.readEvento(codice);
+
+        if(ev == null) {
+            if(eventoDAO.createEvento(evento)) {
+                System.out.println("Evento aggiunto con successo!");
+                try {
+                    this.setViewAttuale(new Home(this, stage));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } else {
+            System.out.println("Errore: codice evento già presente!");
+            this.alert(AlertType.ERROR, "Errore: codice evento già presente!");
         }
     }
 }

@@ -14,6 +14,8 @@ import java.io.IOException;
 
 public class Home extends ViewInterface {
     @FXML
+    private Button btnAggiungiEvento;
+    @FXML
     private Button btnAggiungiPadiglione;
     @FXML
     private MenuItem menuPadiglioni;
@@ -42,6 +44,14 @@ public class Home extends ViewInterface {
             btnAggiungiPadiglione.setOnAction(event -> {
                 try {
                     controller.setViewAttuale(new AggiungiPadiglione(this.controller, stage));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            btnAggiungiEvento.setOnAction(event -> {
+                try {
+                    controller.setViewAttuale(new AggiungiEvento(this.controller, stage));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
