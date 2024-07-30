@@ -17,12 +17,22 @@ public class Home extends ViewInterface {
     private Button btnAggiungiPadiglione;
     @FXML
     private MenuItem menuPadiglioni;
+    @FXML
+    private Button btnLogOut;
 
     @FXML
     public void initialize() {
         menuPadiglioni.setOnAction(event -> {
             try{
                 controller.setViewAttuale(new ListaPadiglioni(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        btnLogOut.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new LogIn(this.controller, stage));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

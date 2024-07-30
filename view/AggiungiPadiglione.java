@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -14,7 +15,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class AggiungiPadiglione extends ViewInterface{
-
     @FXML
     private TextField codePadiglione;
     @FXML
@@ -23,9 +23,19 @@ public class AggiungiPadiglione extends ViewInterface{
     private Button btnConfirm;
     @FXML
     private Button btnCancel;
+    @FXML
+    private MenuItem menuHome;
 
     @FXML
     public void initialize() {
+        menuHome.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new Home(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         btnConfirm.setOnAction(event -> {
             if(codePadiglione.getText().isEmpty() || dimPadiglione.getText().isEmpty()) {
                 System.out.println("Errore: uno o più campi sono vuoti!");

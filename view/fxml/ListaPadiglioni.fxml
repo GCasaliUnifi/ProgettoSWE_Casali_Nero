@@ -32,16 +32,20 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -70,6 +74,19 @@
                      </children></AnchorPane>
               </content>
             </TitledPane>
+            <Label layoutX="432.0" layoutY="20.0" prefHeight="17.0" prefWidth="110.0" text="Modifica Padiglione">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="104.0" text="Codice:" />
+            <Label layoutX="364.0" layoutY="141.0" text="Dimensione:" />
+            <TextField fx:id="codiceModifica" layoutX="432.0" layoutY="100.0" promptText="PD_01" />
+            <TextField fx:id="dimensioneModifica" layoutX="432.0" layoutY="137.0" promptText="45.0" />
+            <Button fx:id="btnSave" layoutX="432.0" layoutY="190.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" text="Salva Modifiche" />
+            <Button fx:id="btnDelete" layoutX="432.0" layoutY="334.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" text="Elimina Padiglione" />
+            <Label layoutX="417.0" layoutY="68.0" text="ID:" />
+            <TextField fx:id="idModifica" editable="false" layoutX="432.0" layoutY="64.0" promptText="ID del padiglione" />
          </children>
     </AnchorPane>
   </children>

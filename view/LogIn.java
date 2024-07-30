@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,6 +43,12 @@ public class LogIn extends ViewInterface {
                 controller.setViewAttuale(new Registrazione(this.controller, stage));
             } catch (Exception e) {
                 throw new RuntimeException(e);
+            }
+        });
+
+        psw.setOnKeyPressed(event -> {  // Se premo invio mentre sono nel campo password, simula il click del bottone accedi
+            if (event.getCode() == KeyCode.ENTER) {
+                accedi.fire();
             }
         });
     }

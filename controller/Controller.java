@@ -151,4 +151,22 @@ public class Controller {
             return null;
         }
     }
+
+    public boolean onUpdatePadiglione(int id, String codice, float dimensione) throws SQLException{
+        Padiglione padiglione = new Padiglione(codice, dimensione);
+        padiglione.setId(id);
+        PadiglioneDAO padiglioneDAO = new PadiglioneDAOImpl();
+        Padiglione p = padiglioneDAO.readPadiglione(codice);
+        if(p == null || p.getId() == id) {
+            if(padiglioneDAO.updatePadiglione(padiglione)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            System.out.println("Errore: codice padiglione già presente!");
+            this.alert(AlertType.ERROR, "Errore: codice padiglione già presente!");
+            return false;
+        }
+    }
 }

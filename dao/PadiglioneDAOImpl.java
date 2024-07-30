@@ -44,7 +44,9 @@ public class PadiglioneDAOImpl extends DataBaseConnector implements PadiglioneDA
             preparedStatement.setString(1, codice);
             ResultSet rs = preparedStatement.executeQuery();
             if(rs.next()) {
-                return new Padiglione(rs.getString("codice"), rs.getFloat("dimensione"));
+                Padiglione p = new Padiglione(rs.getString("codice"), rs.getFloat("dimensione"));
+                p.setId(rs.getInt("id"));
+                return p;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -76,6 +78,21 @@ public class PadiglioneDAOImpl extends DataBaseConnector implements PadiglioneDA
 
     @Override
     public boolean updatePadiglione(Padiglione padiglione) throws SQLException {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE padiglione SET codice = ?, dimensione = ? WHERE id = ?");
+            preparedStatement.setString(1, padiglione.getCodice());
+            preparedStatement.setFloat(2, padiglione.getDimensione());
+            preparedStatement.setInt(3, padiglione.getId());
+
+            if(preparedStatement.executeUpdate() > 0) {
+                return true;
+            } else {
+                throw new Exception("Errore durante l'aggiornamento");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
