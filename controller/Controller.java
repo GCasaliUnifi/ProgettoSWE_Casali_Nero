@@ -188,4 +188,16 @@ public class Controller {
             this.alert(AlertType.ERROR, "Errore: codice evento già presente!");
         }
     }
+
+    public ArrayList<Evento> getListaEventi() throws SQLException {
+        EventoDAO eventoDAO = new EventoDAOImpl();
+        ArrayList<Evento> lista;
+        lista = eventoDAO.readAllEventi();
+
+        if(!lista.isEmpty()) {
+            return lista;
+        } else {
+            return null;
+        }
+    }
 }

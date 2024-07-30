@@ -20,6 +20,8 @@ public class Home extends ViewInterface {
     @FXML
     private MenuItem menuPadiglioni;
     @FXML
+    private MenuItem menuEventi;
+    @FXML
     private Button btnLogOut;
 
     @FXML
@@ -27,6 +29,14 @@ public class Home extends ViewInterface {
         menuPadiglioni.setOnAction(event -> {
             try{
                 controller.setViewAttuale(new ListaPadiglioni(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        menuEventi.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new ListaEventi(this.controller, stage));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

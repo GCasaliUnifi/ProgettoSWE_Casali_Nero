@@ -61,6 +61,23 @@ public class EventoDAOImpl extends DataBaseConnector implements EventoDAO{
 
     @Override
     public ArrayList<Evento> readAllEventi() throws SQLException {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from evento");
+            ResultSet rs = preparedStatement.executeQuery();
+            ArrayList<Evento> eventi = new ArrayList<>();
+            while(rs.next()) {
+                Evento ev = new Evento(rs.getString("codice"), rs.getString("nome"), rs.getString("data"), rs.getString("descrizione"));
+                ev.setId(rs.getInt("id"));
+                eventi.add(ev);
+            }
+
+            return eventi;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
