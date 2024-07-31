@@ -12,7 +12,7 @@ public abstract class ViewInterface {
     protected String title;
     protected String fxmlPath;
     protected int width = 640;
-    protected int height = 480;
+    protected int height = 400;
 
     protected static Stage stage;
     protected Parent root = null;
