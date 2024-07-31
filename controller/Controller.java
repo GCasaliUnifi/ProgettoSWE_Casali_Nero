@@ -26,11 +26,38 @@ public class Controller {
     private Utente utente;
     private ViewInterface viewAttuale;
     private Stage stage;
+    private Padiglione padiglioneSelezionato;
+    private Evento eventoSelezionato;
+    private Utente utenteSelezionato;
 
     public Controller(Stage stage) throws Exception {
         this.utente = null;
         this.stage = stage;
         setViewAttuale(new LogIn(this, stage));
+    }
+
+    public void setPadiglioneSelezionato(Padiglione padiglione) {
+        this.padiglioneSelezionato = padiglione;
+    }
+
+    public Padiglione getPadiglioneSelezionato() {
+        return this.padiglioneSelezionato;
+    }
+
+    public void setEventoSelezionato(Evento evento) {
+        this.eventoSelezionato = evento;
+    }
+
+    public Evento getEventoSelezionato() {
+        return this.eventoSelezionato;
+    }
+
+    public void setUtenteSelezionato(Utente utente) {
+        this.utenteSelezionato = utente;
+    }
+
+    public Utente getUtenteSelezionato() {
+        return this.utenteSelezionato;
     }
 
     private String getSecurePassword(String clearPsw) {
