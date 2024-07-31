@@ -63,11 +63,15 @@ public class EventoDAOImpl extends DataBaseConnector implements EventoDAO{
     public ArrayList<Evento> readAllEventi() throws SQLException {
         try {
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from evento");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from evento ORDER BY data");
             ResultSet rs = preparedStatement.executeQuery();
             ArrayList<Evento> eventi = new ArrayList<>();
             while(rs.next()) {
-                Evento ev = new Evento(rs.getString("codice"), rs.getString("nome"), rs.getString("data"), rs.getString("descrizione"));
+                //Conversione della data in formato gg/mm/aaaa per la visualizzazione
+                String data = rs.getDate("data").toString();
+                String[] dataSplit = data.split("-");
+                data = dataSplit[2] + "/" + dataSplit[1] + "/" + dataSplit[0];
+                Evento ev = new Evento(rs.getString("codice"), rs.getString("nome"), data, rs.getString("descrizione"));
                 ev.setId(rs.getInt("id"));
                 eventi.add(ev);
             }
