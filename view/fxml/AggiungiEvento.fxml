@@ -43,7 +43,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -58,16 +58,16 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="110.0" layoutY="48.0" text="Codice Evento :" />
-            <Label layoutX="112.0" layoutY="83.0" text="Nome evento :" />
-            <TextField fx:id="codiceEvento" layoutX="227.0" layoutY="44.0" prefHeight="26.0" prefWidth="189.0" promptText="E_01" />
-            <TextField fx:id="nomeEvento" layoutX="227.0" layoutY="79.0" prefHeight="26.0" prefWidth="189.0" promptText="Fiera della rana" />
-            <Button fx:id="btnConfirm" layoutX="226.0" layoutY="301.0" mnemonicParsing="false" text="Conferma" />
-            <Button fx:id="btnCancel" layoutX="336.0" layoutY="301.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Annulla" />
-            <Label layoutX="166.0" layoutY="128.0" text="Data :" />
-            <Label layoutX="126.0" layoutY="161.0" text="Descrizione :" />
-            <DatePicker fx:id="dataEvento" layoutX="226.0" layoutY="124.0" />
-            <TextArea fx:id="descrizioneEvento" layoutX="227.0" layoutY="161.0" prefHeight="104.0" prefWidth="189.0" promptText="Inserire descrizione dell'evento" />
+            <Label layoutX="60.0" layoutY="53.0" text="Codice Evento :" />
+            <Label layoutX="66.0" layoutY="101.0" text="Nome evento :" />
+            <TextField fx:id="codiceEvento" layoutX="151.0" layoutY="48.0" prefHeight="27.0" prefWidth="343.0" promptText="E_01" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <TextField fx:id="nomeEvento" layoutX="151.0" layoutY="96.0" prefHeight="27.0" prefWidth="343.0" promptText="Fiera della rana" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <Button fx:id="btnConfirm" layoutX="151.0" layoutY="315.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="152.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Conferma" />
+            <Button fx:id="btnCancel" layoutX="340.0" layoutY="315.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="152.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Annulla" />
+            <Label layoutX="113.0" layoutY="149.0" text="Data :" />
+            <Label layoutX="78.0" layoutY="238.0" text="Descrizione :" />
+            <DatePicker fx:id="dataEvento" layoutX="151.0" layoutY="144.0" prefHeight="27.0" prefWidth="343.0" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <TextArea fx:id="descrizioneEvento" layoutX="149.0" layoutY="194.0" prefHeight="104.0" prefWidth="343.0" promptText="Inserire la descrizione dell'evento" styleClass="input_field" stylesheets="@../css/gui.css" />
          </children>
     </AnchorPane>
   </children>

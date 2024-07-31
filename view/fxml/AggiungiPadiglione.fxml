@@ -41,7 +41,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -56,12 +56,12 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label layoutX="110.0" layoutY="48.0" text="Codice Padiglione :" />
-            <Label layoutX="54.0" layoutY="83.0" text="Dimensioni Padiglione (mq):" />
-            <TextField fx:id="codePadiglione" layoutX="239.0" layoutY="44.0" promptText="P_01" />
-            <TextField fx:id="dimPadiglione" layoutX="239.0" layoutY="79.0" promptText="45.0" />
-            <Button fx:id="btnConfirm" layoutX="276.0" layoutY="137.0" mnemonicParsing="false" text="Conferma" />
-            <Button fx:id="btnCancel" layoutX="276.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Annulla" />
+            <Label layoutX="134.0" layoutY="92.0" text="Codice Padiglione :" />
+            <Label layoutX="86.0" layoutY="136.0" text="Dimensioni Padiglione (mq):" />
+            <TextField fx:id="codePadiglione" layoutX="239.0" layoutY="88.0" prefHeight="25.0" prefWidth="276.0" promptText="P_01" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <TextField fx:id="dimPadiglione" layoutX="239.0" layoutY="132.0" prefHeight="25.0" prefWidth="276.0" promptText="45.0" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <Button fx:id="btnConfirm" layoutX="122.0" layoutY="307.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="178.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Conferma" />
+            <Button fx:id="btnCancel" layoutX="337.0" layoutY="307.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="178.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Annulla" />
          </children>
     </AnchorPane>
   </children>

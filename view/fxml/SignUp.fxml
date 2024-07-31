@@ -41,35 +41,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@../css/gui.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="640.0" styleClass="body" stylesheets="@../css/gui.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="211.0" layoutY="14.0" text="Sei nuovo? Registrati">
+      <Label layoutX="232.0" layoutY="14.0" text="Sei nuovo? Registrati">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <TextField fx:id="email" layoutX="125.0" layoutY="167.0" prefHeight="25.0" prefWidth="348.0" promptText="Email" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <PasswordField fx:id="psw" layoutX="125.0" layoutY="217.0" prefHeight="25.0" prefWidth="348.0" promptText="Password" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <Button fx:id="conferma" layoutX="126.0" layoutY="309.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Conferma">
+      <TextField fx:id="email" layoutX="146.0" layoutY="167.0" prefHeight="25.0" prefWidth="348.0" promptText="Email" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <PasswordField fx:id="psw" layoutX="146.0" layoutY="217.0" prefHeight="25.0" prefWidth="348.0" promptText="Password" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <Button fx:id="conferma" layoutX="147.0" layoutY="309.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Conferma">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Separator layoutX="8.0" layoutY="347.0" prefHeight="0.0" prefWidth="582.0" />
-      <Button fx:id="accedi" layoutX="126.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Accedi">
+      <Separator layoutX="29.0" layoutY="347.0" prefHeight="0.0" prefWidth="582.0" />
+      <Button fx:id="accedi" layoutX="147.0" layoutY="359.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Accedi">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="125.0" layoutY="150.0" prefHeight="17.0" prefWidth="32.0" text="Email" />
-      <Label layoutX="125.0" layoutY="200.0" text="Password" />
-      <PasswordField fx:id="pswConfirm" layoutX="125.0" layoutY="271.0" prefHeight="25.0" prefWidth="348.0" promptText="Ripeti la Password" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <Label layoutX="125.0" layoutY="254.0" text="Conferma Password" />
-      <TextField fx:id="cellphone" layoutX="125.0" layoutY="117.0" prefHeight="25.0" prefWidth="348.0" promptText="Cellulare" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <Label layoutX="125.0" layoutY="100.0" prefHeight="17.0" prefWidth="48.0" text="Cellulare" />
-      <TextField fx:id="firstName" layoutX="125.0" layoutY="66.0" prefHeight="27.0" prefWidth="165.0" promptText="Nome" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <Label layoutX="125.0" layoutY="49.0" prefHeight="17.0" prefWidth="39.0" text="Nome" />
-      <TextField fx:id="lastName" layoutX="296.0" layoutY="66.0" prefHeight="27.0" prefWidth="176.0" promptText="Cognome" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <Label layoutX="296.0" layoutY="49.0" prefHeight="17.0" prefWidth="54.0" text="Cognome" />
+      <Label layoutX="146.0" layoutY="150.0" prefHeight="17.0" prefWidth="32.0" text="Email" />
+      <Label layoutX="146.0" layoutY="200.0" text="Password" />
+      <PasswordField fx:id="pswConfirm" layoutX="146.0" layoutY="271.0" prefHeight="25.0" prefWidth="348.0" promptText="Ripeti la Password" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <Label layoutX="146.0" layoutY="254.0" text="Conferma Password" />
+      <TextField fx:id="cellphone" layoutX="146.0" layoutY="117.0" prefHeight="25.0" prefWidth="348.0" promptText="Cellulare" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <Label layoutX="146.0" layoutY="100.0" prefHeight="17.0" prefWidth="48.0" text="Cellulare" />
+      <TextField fx:id="firstName" layoutX="146.0" layoutY="66.0" prefHeight="27.0" prefWidth="165.0" promptText="Nome" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <Label layoutX="146.0" layoutY="49.0" prefHeight="17.0" prefWidth="39.0" text="Nome" />
+      <TextField fx:id="lastName" layoutX="317.0" layoutY="66.0" prefHeight="27.0" prefWidth="176.0" promptText="Cognome" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <Label layoutX="317.0" layoutY="49.0" prefHeight="17.0" prefWidth="54.0" text="Cognome" />
    </children>
 </AnchorPane>

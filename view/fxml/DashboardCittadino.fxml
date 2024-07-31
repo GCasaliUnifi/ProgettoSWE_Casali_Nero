@@ -43,7 +43,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -58,7 +58,7 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <TitledPane animated="false" layoutY="1.0" prefHeight="373.0" prefWidth="202.0" text="Biglietti acquistati">
+            <TitledPane animated="false" collapsible="false" layoutY="1.0" prefHeight="373.0" prefWidth="202.0" text="Biglietti acquistati">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -72,7 +72,7 @@
               </content>
             </TitledPane>
             <Line endX="-100.0" endY="366.0" layoutX="302.0" layoutY="8.0" startX="-100.0" startY="-7.0" />
-            <TitledPane animated="false" layoutX="203.0" layoutY="2.0" prefHeight="373.0" prefWidth="202.0" text="Padiglioni Affittati">
+            <TitledPane animated="false" collapsible="false" layoutX="203.0" layoutY="2.0" prefHeight="373.0" prefWidth="202.0" text="Padiglioni Affittati">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -86,8 +86,8 @@
               </content>
             </TitledPane>
             <Line endX="-100.0" endY="185.0" layoutX="506.0" layoutY="189.0" startX="-100.0" startY="-186.0" />
-            <Button fx:id="btnRichiediLicenza" layoutX="427.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Richiedi Licenza" />
-            <Button fx:id="btnLogOut" layoutX="427.0" layoutY="335.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" text="Log Out" />
+            <Button fx:id="btnRichiediLicenza" layoutX="427.0" layoutY="103.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Richiedi Licenza" />
+            <Button fx:id="btnLogOut" layoutX="427.0" layoutY="335.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="192.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Log Out" />
             <Label layoutX="427.0" layoutY="15.0" prefHeight="19.0" prefWidth="105.0" text="Codice Licenza : " />
             <Label fx:id="codiceLicenza" layoutX="532.0" layoutY="16.0" prefHeight="18.0" prefWidth="98.0" />
             <Label layoutX="427.0" layoutY="43.0" prefHeight="19.0" prefWidth="98.0" text="Scadenza :" />

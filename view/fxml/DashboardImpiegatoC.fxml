@@ -41,7 +41,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <MenuBar VBox.vgrow="NEVER">
          <menus>
@@ -56,9 +56,9 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="btnAggiungiEvento" layoutX="431.0" layoutY="52.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Aggiungi Evento" />
-            <Button fx:id="btnAggiungiPadiglione" layoutX="431.0" layoutY="92.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Aggiungi Padiglione" />
-            <TitledPane animated="false" layoutX="14.0" layoutY="14.0" prefHeight="349.0" prefWidth="348.0" text="Licenze in Attesa">
+            <Button fx:id="btnAggiungiEvento" layoutX="431.0" layoutY="52.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Aggiungi Evento" />
+            <Button fx:id="btnAggiungiPadiglione" layoutX="431.0" layoutY="92.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Aggiungi Padiglione" />
+            <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="14.0" prefHeight="349.0" prefWidth="348.0" text="Licenze in Attesa">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -67,8 +67,8 @@
                   </AnchorPane>
               </content>
             </TitledPane>
-            <Button fx:id="btnLogOut" layoutX="450.0" layoutY="323.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="109.0" text="Log Out" />
-            <Button fx:id="btnListaUtenti" layoutX="431.0" layoutY="131.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" text="Lista Utenti" />
+            <Button fx:id="btnLogOut" layoutX="431.0" layoutY="332.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="147.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Log Out" />
+            <Button fx:id="btnListaUtenti" layoutX="431.0" layoutY="131.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="147.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Lista Utenti" />
          </children>
     </AnchorPane>
   </children>

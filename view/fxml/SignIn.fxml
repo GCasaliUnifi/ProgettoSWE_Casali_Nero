@@ -41,27 +41,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="body" stylesheets="@../css/gui.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minWidth="-Infinity" prefHeight="400.0" prefWidth="640.0" styleClass="body" stylesheets="@../css/gui.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="231.0" layoutY="38.0" text="Benvenuto">
+      <Label layoutX="251.0" layoutY="38.0" text="Benvenuto">
          <font>
             <Font size="30.0" />
          </font>
       </Label>
-      <TextField fx:id="email" layoutX="126.0" layoutY="119.0" prefHeight="25.0" prefWidth="348.0" promptText="Email" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <PasswordField fx:id="psw" layoutX="126.0" layoutY="187.0" prefHeight="25.0" prefWidth="348.0" promptText="Password" styleClass="input_field" stylesheets="@../css/gui.css" />
-      <Button fx:id="accedi" layoutX="126.0" layoutY="245.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Accedi">
+      <TextField fx:id="email" layoutX="146.0" layoutY="119.0" prefHeight="25.0" prefWidth="348.0" promptText="Email" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <PasswordField fx:id="psw" layoutX="146.0" layoutY="187.0" prefHeight="25.0" prefWidth="348.0" promptText="Password" styleClass="input_field" stylesheets="@../css/gui.css" />
+      <Button fx:id="accedi" layoutX="146.0" layoutY="245.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Accedi">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Separator layoutX="8.0" layoutY="304.0" prefHeight="0.0" prefWidth="582.0" />
-      <Button fx:id="registrati" layoutX="126.0" layoutY="337.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Registrati">
+      <Separator layoutX="29.0" layoutY="304.0" prefHeight="0.0" prefWidth="582.0" />
+      <Button fx:id="registrati" layoutX="146.0" layoutY="338.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="348.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Registrati">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Label layoutX="126.0" layoutY="102.0" prefHeight="17.0" prefWidth="32.0" text="Email" />
-      <Label layoutX="126.0" layoutY="170.0" text="Password" />
+      <Label layoutX="146.0" layoutY="102.0" prefHeight="17.0" prefWidth="32.0" text="Email" />
+      <Label layoutX="146.0" layoutY="170.0" text="Password" />
    </children>
 </AnchorPane>
