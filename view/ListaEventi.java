@@ -7,8 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Evento;
@@ -19,6 +18,8 @@ import java.util.ArrayList;
 
 public class ListaEventi extends ViewInterface{
     @FXML
+    private MenuItem menuHome;
+    @FXML
     private TableColumn<Evento, String> dataEvento;
     @FXML
     private TableColumn<Evento, String> nomeEvento;
@@ -26,16 +27,35 @@ public class ListaEventi extends ViewInterface{
     private TableColumn<Evento, String> descrizioneEvento;
     @FXML
     private TableView<Evento> tabellaEventi;
+    @FXML
+    private Label txtListaEventi;
 
     @FXML
     public void initialize() throws SQLException {
+        menuHome.setOnAction(e -> {
+            try {
+                controller.setViewAttuale(new Home(controller, stage));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        if(controller.isAmministratore()){
+            txtListaEventi.setText("Seleziona un evento per modificarlo");
+        }
+
         dataEvento.setCellValueFactory(new PropertyValueFactory<>("data"));
         nomeEvento.setCellValueFactory(new PropertyValueFactory<>("nome"));
         descrizioneEvento.setCellValueFactory(new PropertyValueFactory<>("descrizione"));
 
         ArrayList<Evento> lista = controller.getListaEventi();
-        ObservableList<Evento> tmpList = FXCollections.observableArrayList(lista);
-        tabellaEventi.setItems(tmpList);
+        if(lista != null){
+            ObservableList<Evento> tmpList = FXCollections.observableArrayList(lista);
+            tabellaEventi.setItems(tmpList);
+        }
+
     }
 
     public ListaEventi(Controller c, Stage stage) {
