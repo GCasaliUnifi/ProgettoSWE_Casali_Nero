@@ -32,13 +32,12 @@
   OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -57,21 +56,14 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <TitledPane animated="false" collapsible="false" layoutX="14.0" layoutY="72.0" prefHeight="293.0" prefWidth="610.0" text="Lista Padiglioni">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tabellaPadiglioni" prefHeight="328.0" prefWidth="610.0">
-                          <columns>
-                            <TableColumn fx:id="idPadiglione" prefWidth="147.0" text="ID" />
-                            <TableColumn fx:id="codicePadiglione" prefWidth="240.0" text="CODICE" />
-                              <TableColumn fx:id="dimensionePadiglione" prefWidth="220.0" text="DIMENSIONE" />
-                          </columns>
-                        </TableView>
-                     </children></AnchorPane>
-              </content>
-            </TitledPane>
-            <Label fx:id="txtListaPadiglioni" alignment="CENTER" layoutX="12.0" layoutY="28.0" prefHeight="17.0" prefWidth="610.0" text="Seleziona un padiglione per affittarlo" textAlignment="CENTER" />
+            <Label layoutX="191.0" layoutY="122.0" text="Codice:" />
+            <TextField fx:id="codiceModifica" layoutX="233.0" layoutY="117.0" prefHeight="27.0" prefWidth="243.0" promptText="PD_01" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <TextField fx:id="idModifica" editable="false" layoutX="233.0" layoutY="62.0" prefHeight="27.0" prefWidth="243.0" promptText="ID del padiglione" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <TextField fx:id="dimensioneModifica" layoutX="233.0" layoutY="173.0" prefHeight="27.0" prefWidth="243.0" promptText="45.0" styleClass="input_field" stylesheets="@../css/gui.css" />
+            <Button fx:id="btnSave" layoutX="122.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" styleClass="primary_btn" stylesheets="@../css/gui.css" text="Salva Modifiche" />
+            <Label layoutX="165.0" layoutY="178.0" text="Dimensione:" />
+            <Button fx:id="btnCancel" layoutX="358.0" layoutY="300.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="161.0" styleClass="secondary_btn" stylesheets="@../css/gui.css" text="Annulla" />
+            <Label layoutX="218.0" layoutY="67.0" text="ID:" />
          </children>
     </AnchorPane>
   </children>
