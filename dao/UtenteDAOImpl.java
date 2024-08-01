@@ -2,13 +2,11 @@ package dao;
 
 import model.Utente;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UtenteDAOImpl extends DataBaseConnector implements UtenteDAO {
     private Utente utente;
@@ -24,7 +22,7 @@ public class UtenteDAOImpl extends DataBaseConnector implements UtenteDAO {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user(firstName, lastName, email, cellphone, psw, type) values (?, ?, ?, ?, ?, 0)");
             preparedStatement.setString(1, utente.getNome());
             preparedStatement.setString(2, utente.getCognome());
-            preparedStatement.setString(3, utente.geteMail());
+            preparedStatement.setString(3, utente.getEmail());
             preparedStatement.setString(4, utente.getTelefono());
             preparedStatement.setString(5, utente.getPassword());
 
@@ -97,7 +95,7 @@ public class UtenteDAOImpl extends DataBaseConnector implements UtenteDAO {
             preparedStatement.setString(1, utente.getNome());
             preparedStatement.setString(2, utente.getCognome());
             preparedStatement.setString(3, utente.getTelefono());
-            preparedStatement.setString(4, utente.geteMail());
+            preparedStatement.setString(4, utente.getEmail());
             preparedStatement.setString(5, utente.getPassword());
             preparedStatement.setInt(6, utente.getType());
 
@@ -130,5 +128,30 @@ public class UtenteDAOImpl extends DataBaseConnector implements UtenteDAO {
         }
 
         return false;
+    }
+
+    @Override
+    public ArrayList<Utente> readAllCittadini() {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from user where type = ?");
+            preparedStatement.setInt(1, 0);
+            ResultSet rs = preparedStatement.executeQuery();
+            ArrayList<Utente> cittadini = new ArrayList<>();
+            while(rs.next()) {
+                Utente u = new Utente(rs.getString("email"), rs.getString("psw"));
+                u.setNome(rs.getString("firstName"));
+                u.setCognome(rs.getString("lastName"));
+                u.setId(rs.getInt("id"));
+                u.setTelefono(rs.getString("cellphone"));
+                u.setType(rs.getInt("type"));
+                cittadini.add(u);
+            }
+            return cittadini;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }
