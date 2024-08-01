@@ -5,12 +5,12 @@ public class Utente {
     private String nome;
     private String cognome;
     private String telefono;
-    private String eMail;
+    private String email;
     private String password;
     private int type;
 
     public Utente(String email, String password) {
-        eMail = email;
+        this.email = email;
         this.password = password;
     }
 
@@ -30,8 +30,8 @@ public class Utente {
         this.telefono = telefono;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setPassword(String password) {
@@ -58,8 +58,8 @@ public class Utente {
         return telefono;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
     public String getPassword() {
