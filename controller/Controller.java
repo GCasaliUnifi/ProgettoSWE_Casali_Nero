@@ -227,4 +227,16 @@ public class Controller {
             return null;
         }
     }
+
+    public ArrayList<Utente> getListaCittadini() throws SQLException {
+        UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
+        ArrayList<Utente> lista;
+        lista = utenteDAO.readAllCittadini();
+
+        if(!lista.isEmpty()) {
+            return lista;
+        } else {
+            return null;
+        }
+    }
 }

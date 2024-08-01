@@ -18,6 +18,8 @@ public class Home extends ViewInterface {
     @FXML
     private Button btnAggiungiPadiglione;
     @FXML
+    private Button btnListaCittadini;
+    @FXML
     private MenuItem menuPadiglioni;
     @FXML
     private MenuItem menuEventi;
@@ -62,6 +64,14 @@ public class Home extends ViewInterface {
             btnAggiungiEvento.setOnAction(event -> {
                 try {
                     controller.setViewAttuale(new AggiungiEvento(this.controller, stage));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            btnListaCittadini.setOnAction(event -> {
+                try {
+                    controller.setViewAttuale(new ListaCittadini(this.controller, stage));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
