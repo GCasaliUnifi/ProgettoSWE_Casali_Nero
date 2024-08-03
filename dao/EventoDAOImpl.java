@@ -1,7 +1,6 @@
 package dao;
 
 import model.Evento;
-import model.Padiglione;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
