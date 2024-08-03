@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import model.Evento;
+import model.Licenza;
 import model.Padiglione;
 import model.Utente;
 import view.Home;
@@ -237,6 +238,44 @@ public class Controller {
             return lista;
         } else {
             return null;
+        }
+    }
+
+    public Licenza getLicenzaCittadino(int id_utente) throws SQLException {
+        LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
+        return licenzaDAO.readLicenza(id_utente);
+    }
+
+    public boolean onAddLicenza(int id_utente, String codice, String scadenza) throws SQLException {
+        Licenza licenza = new Licenza(codice);
+        licenza.setId_utente(id_utente);
+        licenza.setScadenza(scadenza);
+        LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
+        Licenza l = licenzaDAO.readLicenza(codice);
+
+        if(l == null) {
+            if(licenzaDAO.createLicenza(licenza)) {
+                System.out.println("Licenza aggiunta con successo!");
+                return true;
+            }
+        } else {
+            System.out.println("Errore: codice licenza già presente!");
+            return false;
+        }
+        return false;
+    }
+
+    public boolean onUpdateLicenza(int id, int id_utente, String codice, String scadenza) throws SQLException {
+        Licenza licenza = new Licenza(codice);
+        licenza.setId_utente(id_utente);
+        licenza.setScadenza(scadenza);
+        licenza.setId(id);
+        LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
+        if(licenzaDAO.updateLicenza(licenza)) {
+            System.out.println("Licenza aggiornata con successo!");
+            return true;
+        } else {
+            return false;
         }
     }
 }
