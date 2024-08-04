@@ -26,7 +26,7 @@ public class LicenzaDAOImpl extends DataBaseConnector implements LicenzaDAO{
                 throw new Exception("Errore durante l'inserimento");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Errore in createLicenza: "+e.getMessage());
         }
         return false;
     }
