@@ -33,6 +33,10 @@ public class ModificaCittadino extends ViewInterface{
     private TextField emailCittadino;
     @FXML
     private TextField pswCittadino;
+    @FXML
+    private CheckBox isIC;
+    @FXML
+    private Button btnSalva;
 
     @FXML
     private Label codiceLicenza;
@@ -41,11 +45,9 @@ public class ModificaCittadino extends ViewInterface{
     @FXML
     private Button btnLicenza;
     @FXML
-    private Button btnDeleteLicenza;
-    @FXML
     private CheckBox confermaEliminazione;
     @FXML
-    private Button btnDeleteCittadino;
+    private Button btnDelete;
 
     @FXML
     public void initialize() throws SQLException {
@@ -59,13 +61,32 @@ public class ModificaCittadino extends ViewInterface{
             }
         });
 
-        //Carico i dati del cittadino selezionato nei campi di testo
+        //Sezione per la gestione del cittadino
         Utente cittadinoSelezionato = controller.getUtenteSelezionato();
         idCittadino.setText(String.valueOf(cittadinoSelezionato.getId()));
         nomeCittadino.setText(cittadinoSelezionato.getNome());
         cognomeCittadino.setText(cittadinoSelezionato.getCognome());
         emailCittadino.setText(cittadinoSelezionato.getEmail());
+        isIC.setSelected(cittadinoSelezionato.getType() == 1);
+        btnSalva.setOnAction(e -> {
+            try {
+                String newPsw = pswCittadino.getText();
+                if(newPsw.isEmpty()){
+                    newPsw = cittadinoSelezionato.getPassword();
+                }
+                if(nomeCittadino.getText().isEmpty() || cognomeCittadino.getText().isEmpty() || emailCittadino.getText().isEmpty()){
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Compilare i campi obbligatori (*)");
+                    alert.showAndWait();
+                }else{
+                    controller.onUpdateUtente(cittadinoSelezionato.getId(), nomeCittadino.getText(), cognomeCittadino.getText(), emailCittadino.getText(), controller.getUtenteSelezionato().getTelefono(), newPsw, isIC.isSelected());
+                    controller.setViewAttuale(new ModificaCittadino(controller, stage));
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
 
+        //Sezione per la gestione della licenza
         Licenza licenza = controller.getLicenzaCittadino(cittadinoSelezionato.getId());
         String data_scadenza = LocalDate.now().plusYears(1).toString();
         if (licenza != null) {
@@ -87,23 +108,39 @@ public class ModificaCittadino extends ViewInterface{
                     }
                 });
             }
+            btnDelete.setOnAction(e -> {
+                if(confermaEliminazione.isSelected()){
+                    try {
+                        controller.onDeleteLicenza(licenza.getId());
+                        controller.setViewAttuale(new ModificaCittadino(controller, stage));
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                }else{
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Confermare l'eliminazione della licenza");
+                    alert.showAndWait();
+                }
+            });
         } else {
             btnLicenza.setText("Genera Licenza");
             btnLicenza.setOnAction(e -> {
                 try {
                     StringBuilder codice_generato;
+                    int watchdog = 0;   //Aggiunto per evitare loop infinito
                     do {
+                        watchdog++;
                         codice_generato = new StringBuilder();
                         for (int i = 0; i < 6; i++) {
                             codice_generato.append((int) (Math.random() * 10));
                         }
-                    } while (!controller.onAddLicenza(cittadinoSelezionato.getId(), codice_generato.toString(), data_scadenza));
+                        System.out.println("ID Cittadino: " + cittadinoSelezionato.getId() + " Codice generato: " + codice_generato.toString() + " Data scadenza: " + data_scadenza);
+                    } while (!controller.onAddLicenza(cittadinoSelezionato.getId(), codice_generato.toString(), data_scadenza) && watchdog < 20);
                     controller.setViewAttuale(new ModificaCittadino(controller, stage));
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             });
-            btnDeleteLicenza.setDisable(true);
+            btnDelete.setDisable(true);
         }
 
     }
