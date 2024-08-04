@@ -91,14 +91,14 @@ public class UtenteDAOImpl extends DataBaseConnector implements UtenteDAO {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE user SET firstName = ?, lastName = ?, cellphone = ?," +
-                    " email = ?, psw = ?, type = ?");
+                    " email = ?, psw = ?, type = ? WHERE id = ?");
             preparedStatement.setString(1, utente.getNome());
             preparedStatement.setString(2, utente.getCognome());
             preparedStatement.setString(3, utente.getTelefono());
             preparedStatement.setString(4, utente.getEmail());
             preparedStatement.setString(5, utente.getPassword());
             preparedStatement.setInt(6, utente.getType());
-
+            preparedStatement.setInt(7, utente.getId());
             if(preparedStatement.executeUpdate() > 0) {
                 System.out.println("Update eseguito con successo!");
                 return true;
