@@ -265,6 +265,16 @@ public class Controller {
         return false;
     }
 
+    public boolean onDeleteLicenza(int id) throws SQLException {
+        LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
+        if(licenzaDAO.deleteLicenza(id)) {
+            System.out.println("Licenza eliminata con successo!");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean onUpdateLicenza(int id, int id_utente, String codice, String scadenza) throws SQLException {
         Licenza licenza = new Licenza(codice);
         licenza.setId_utente(id_utente);
@@ -275,6 +285,42 @@ public class Controller {
             System.out.println("Licenza aggiornata con successo!");
             return true;
         } else {
+            return false;
+        }
+    }
+
+    public boolean onUpdateUtente(int id, String nome, String cognome, String email, String telefono, String password, boolean type) throws SQLException {
+        UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
+        Utente u = utenteDAO.readUtente(id);
+        String newPsw = password;
+        if(u.getPassword().equals(newPsw)){
+            newPsw = u.getPassword();
+        }else{
+            newPsw = getSecurePassword(password);
+        }
+        u = utenteDAO.readUtente(email);
+
+        if(u == null || u.getId() == id) {
+            Utente utente = new Utente(email, newPsw);
+            utente.setId(id);
+            utente.setNome(nome);
+            utente.setCognome(cognome);
+            utente.setTelefono(telefono);
+            if(type){
+                utente.setType(1);
+            }else{
+                utente.setType(0);
+            }
+            if(utenteDAO.updateUtente(utente)) {
+                System.out.println("Utente aggiornato con successo!");
+                setUtenteSelezionato(utente);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            System.out.println("Errore: mail già presente, usare un'altra mail!");
+            this.alert(AlertType.ERROR, "Errore: email già utilizzata!");
             return false;
         }
     }
