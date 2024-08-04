@@ -24,6 +24,11 @@ public class ListaCittadini extends ViewInterface{
     @FXML
     private MenuItem menuHome;
     @FXML
+    private MenuItem menuEventi;
+    @FXML
+    private MenuItem menuPadiglioni;
+
+    @FXML
     private TableColumn<Utente, String> nomeCittadino;
     @FXML
     private TableColumn<Utente, String> cognomeCittadino;
@@ -37,6 +42,26 @@ public class ListaCittadini extends ViewInterface{
         menuHome.setOnAction(e -> {
             try {
                 controller.setViewAttuale(new Home(controller, stage));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        menuEventi.setOnAction(e -> {
+            try {
+                controller.setViewAttuale(new ListaEventi(controller, stage));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        menuPadiglioni.setOnAction(e -> {
+            try {
+                controller.setViewAttuale(new ListaPadiglioni(controller, stage));
             } catch (IOException ex) {
                 ex.printStackTrace();
             } catch (Exception ex) {

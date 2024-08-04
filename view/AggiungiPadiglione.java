@@ -16,6 +16,13 @@ import java.sql.SQLException;
 
 public class AggiungiPadiglione extends ViewInterface{
     @FXML
+    private MenuItem menuHome;
+    @FXML
+    private MenuItem menuEventi;
+    @FXML
+    private MenuItem menuPadiglioni;
+
+    @FXML
     private TextField codePadiglione;
     @FXML
     private TextField dimPadiglione;
@@ -23,14 +30,28 @@ public class AggiungiPadiglione extends ViewInterface{
     private Button btnConfirm;
     @FXML
     private Button btnCancel;
-    @FXML
-    private MenuItem menuHome;
 
     @FXML
     public void initialize() {
         menuHome.setOnAction(event -> {
             try {
                 controller.setViewAttuale(new Home(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        menuEventi.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new ListaEventi(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        menuPadiglioni.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new ListaPadiglioni(this.controller, stage));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -61,7 +82,7 @@ public class AggiungiPadiglione extends ViewInterface{
 
 
     public AggiungiPadiglione(Controller c, Stage stage) {
-        super(c, "Dashboard", "fxml/AggiungiPadiglione.fxml");
+        super(c, "Aggiungi Padiglione", "fxml/AggiungiPadiglione.fxml");
         ViewInterface.stage = stage;
     }
 

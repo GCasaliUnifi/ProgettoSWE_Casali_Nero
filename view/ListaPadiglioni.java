@@ -20,6 +20,8 @@ public class ListaPadiglioni extends ViewInterface{
 
     @FXML
     private MenuItem menuHome;
+    @FXML
+    private MenuItem menuEventi;
 
     @FXML
     private TableView<Padiglione> tabellaPadiglioni;
@@ -37,6 +39,14 @@ public class ListaPadiglioni extends ViewInterface{
         menuHome.setOnAction(event -> {
             try {
                 controller.setViewAttuale(new Home(this.controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        menuEventi.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new ListaEventi(this.controller, stage));
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }

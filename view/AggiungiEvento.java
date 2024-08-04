@@ -14,6 +14,13 @@ import java.time.LocalDate;
 
 public class AggiungiEvento extends ViewInterface {
     @FXML
+    private MenuItem menuHome;
+    @FXML
+    private MenuItem menuEventi;
+    @FXML
+    private MenuItem menuPadiglioni;
+
+    @FXML
     private TextField codiceEvento;
     @FXML
     private TextField nomeEvento;
@@ -29,6 +36,30 @@ public class AggiungiEvento extends ViewInterface {
 
     @FXML
     public void initialize() {
+        menuHome.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new Home(controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        menuEventi.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new ListaEventi(controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        menuPadiglioni.setOnAction(event -> {
+            try {
+                controller.setViewAttuale(new ListaPadiglioni(controller, stage));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         btnConfirm.setOnAction(event -> {
             if(codiceEvento.getText().isEmpty() || nomeEvento.getText().isEmpty() || descrizioneEvento.getText().isEmpty() || dataEvento.getValue() == null) {
                 System.out.println("Errore: uno o più campi sono vuoti!");
