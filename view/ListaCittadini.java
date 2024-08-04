@@ -56,11 +56,13 @@ public class ListaCittadini extends ViewInterface{
 
         tabellaCittadini.setOnMouseClicked(e -> {
             Utente cittadinoSelezionato = tabellaCittadini.getSelectionModel().getSelectedItem();
-            controller.setUtenteSelezionato(cittadinoSelezionato);
-            try {
-                controller.setViewAttuale(new ModificaCittadino(controller, stage));
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            if (cittadinoSelezionato != null) {
+                controller.setUtenteSelezionato(cittadinoSelezionato);
+                try {
+                    controller.setViewAttuale(new ModificaCittadino(controller, stage));
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
