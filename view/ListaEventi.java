@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Evento;
+import model.Padiglione;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -67,6 +68,25 @@ public class ListaEventi extends ViewInterface{
             ObservableList<Evento> tmpList = FXCollections.observableArrayList(lista);
             tabellaEventi.setItems(tmpList);
         }
+
+        //Se seleziono un padiglione dalla tabella carico i suoi dati nei campi di testo
+        tabellaEventi.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                System.out.println("Evento selezionato: "+newSelection.getId());
+                Evento ev = new Evento(newSelection.getCodice(), newSelection.getNome(), newSelection.getData(), newSelection.getDescrizione());
+                ev.setId(newSelection.getId());
+                controller.setEventoSelezionato(ev);
+                try{
+                    if(controller.isAmministratore()){
+                        controller.setViewAttuale(new ModificaEvento(this.controller, stage));
+                    }else{
+                        System.out.println("Implementare vista per Cittadino");
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
 
     }
 
