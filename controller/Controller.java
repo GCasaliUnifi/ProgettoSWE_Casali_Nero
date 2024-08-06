@@ -147,6 +147,8 @@ public class Controller {
         return (utente.getType() == 1);
     }
 
+    //PADIGLIONE
+
     public void onAddPadiglione(String codice, float dimensione) throws SQLException {
         Padiglione padiglione = new Padiglione(codice, dimensione);
         PadiglioneDAO padiglioneDAO = new PadiglioneDAOImpl();
@@ -197,6 +199,8 @@ public class Controller {
         }
     }
 
+    //EVENTO
+
     public void onAddEvento(String codice, String nome, String data, String descrizione) throws SQLException {
         Evento evento = new Evento(codice, nome, data, descrizione);
         EventoDAO eventoDAO = new EventoDAOImpl();
@@ -229,6 +233,32 @@ public class Controller {
         }
     }
 
+    public boolean onUpdateEvento(int id, String codice, String nome, String data, String descrizione) throws SQLException {
+        Evento evento = new Evento(codice, nome, data, descrizione);
+        evento.setId(id);
+        EventoDAO eventoDAO = new EventoDAOImpl();
+
+        if(eventoDAO.updateEvento(evento)) {
+            System.out.println("Evento aggiornato con successo!");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean onDeleteEvento(int id) throws SQLException {
+        EventoDAO eventoDAO = new EventoDAOImpl();
+
+        if(eventoDAO.deleteEvento(id)) {
+            System.out.println("Evento eliminato con successo!");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //UTENTE
+
     public ArrayList<Utente> getListaCittadini() throws SQLException {
         UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
         ArrayList<Utente> lista;
@@ -240,6 +270,44 @@ public class Controller {
             return null;
         }
     }
+
+    public boolean onUpdateUtente(int id, String nome, String cognome, String email, String telefono, String password, boolean type) throws SQLException {
+        UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
+        Utente u = utenteDAO.readUtente(id);
+        String newPsw = password;
+        if(u.getPassword().equals(newPsw)){
+            newPsw = u.getPassword();
+        }else{
+            newPsw = getSecurePassword(password);
+        }
+        u = utenteDAO.readUtente(email);
+
+        if(u == null || u.getId() == id) {
+            Utente utente = new Utente(email, newPsw);
+            utente.setId(id);
+            utente.setNome(nome);
+            utente.setCognome(cognome);
+            utente.setTelefono(telefono);
+            if(type){
+                utente.setType(1);
+            }else{
+                utente.setType(0);
+            }
+            if(utenteDAO.updateUtente(utente)) {
+                System.out.println("Utente aggiornato con successo!");
+                setUtenteSelezionato(utente);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            System.out.println("Errore: mail già presente, usare un'altra mail!");
+            this.alert(AlertType.ERROR, "Errore: email già utilizzata!");
+            return false;
+        }
+    }
+
+    //LICENZA
 
     public Licenza getLicenzaCittadino(int id_utente) throws SQLException {
         LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
@@ -289,39 +357,4 @@ public class Controller {
         }
     }
 
-    public boolean onUpdateUtente(int id, String nome, String cognome, String email, String telefono, String password, boolean type) throws SQLException {
-        UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
-        Utente u = utenteDAO.readUtente(id);
-        String newPsw = password;
-        if(u.getPassword().equals(newPsw)){
-            newPsw = u.getPassword();
-        }else{
-            newPsw = getSecurePassword(password);
-        }
-        u = utenteDAO.readUtente(email);
-
-        if(u == null || u.getId() == id) {
-            Utente utente = new Utente(email, newPsw);
-            utente.setId(id);
-            utente.setNome(nome);
-            utente.setCognome(cognome);
-            utente.setTelefono(telefono);
-            if(type){
-                utente.setType(1);
-            }else{
-                utente.setType(0);
-            }
-            if(utenteDAO.updateUtente(utente)) {
-                System.out.println("Utente aggiornato con successo!");
-                setUtenteSelezionato(utente);
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            System.out.println("Errore: mail già presente, usare un'altra mail!");
-            this.alert(AlertType.ERROR, "Errore: email già utilizzata!");
-            return false;
-        }
-    }
 }

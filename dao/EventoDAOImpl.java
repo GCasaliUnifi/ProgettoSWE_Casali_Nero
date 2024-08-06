@@ -86,11 +86,43 @@ public class EventoDAOImpl extends DataBaseConnector implements EventoDAO{
 
     @Override
     public boolean updateEvento(Evento evento) throws SQLException {
+        try{
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE evento SET codice = ?, nome = ?, data = ?, descrizione = ? WHERE id = ?");
+            preparedStatement.setString(1, evento.getCodice());
+            preparedStatement.setString(2, evento.getNome());
+            preparedStatement.setDate(3, Date.valueOf(evento.getData()));
+            preparedStatement.setString(4, evento.getDescrizione());
+            preparedStatement.setInt(5, evento.getId());
+
+            if(preparedStatement.executeUpdate() > 0) {
+                return true;
+            } else {
+                throw new Exception("Errore durante l'aggiornamento");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
     @Override
     public boolean deleteEvento(int id) throws SQLException {
+        try{
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM evento WHERE id = ?");
+            preparedStatement.setInt(1, id);
+
+            if(preparedStatement.executeUpdate() > 0) {
+                return true;
+            } else {
+                throw new Exception("Errore durante l'aggiornamento");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 }
