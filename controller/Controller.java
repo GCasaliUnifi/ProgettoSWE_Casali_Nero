@@ -309,6 +309,11 @@ public class Controller {
 
     //LICENZA
 
+    public Licenza getLicenzaCittadino() throws SQLException {
+        LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
+        return licenzaDAO.readLicenza(this.utente.getId());
+    }
+
     public Licenza getLicenzaCittadino(int id_utente) throws SQLException {
         LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
         return licenzaDAO.readLicenza(id_utente);
