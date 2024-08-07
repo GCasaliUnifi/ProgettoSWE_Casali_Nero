@@ -71,8 +71,8 @@
             <Separator layoutX="9.0" layoutY="295.0" prefHeight="3.0" prefWidth="623.0" />
             <CheckBox fx:id="confermaEliminazione" layoutX="145.0" layoutY="325.0" mnemonicParsing="false" text="Conferma Eliminazione" />
             <Button fx:id="btnDelete" layoutX="339.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" styleClass="delete_btn" stylesheets="@../css/gui.css" text="Elimina" />
-            <Label fx:id="codiceEvento" disable="true" layoutX="151.0" layoutY="19.0" prefHeight="17.0" prefWidth="140.0" style="-fx-font-weight: bold; -fx-background-color: white;" />
-            <Label fx:id="dataEvento" disable="true" layoutX="345.0" layoutY="19.0" prefHeight="17.0" prefWidth="140.0" style="-fx-font-weight: bold; -fx-background-color: white;" />
+            <Label fx:id="codiceEvento" layoutX="151.0" layoutY="19.0" prefHeight="17.0" prefWidth="140.0" />
+            <Label fx:id="dataEvento" layoutX="345.0" layoutY="19.0" prefHeight="17.0" prefWidth="140.0" />
          </children>
     </AnchorPane>
   </children>
