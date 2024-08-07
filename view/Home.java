@@ -4,21 +4,18 @@ import controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.Licenza;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class Home extends ViewInterface {
-    @FXML
-    private Button btnAggiungiEvento;
-    @FXML
-    private Button btnAggiungiPadiglione;
-    @FXML
-    private Button btnListaCittadini;
     @FXML
     private MenuItem menuPadiglioni;
     @FXML
@@ -26,8 +23,24 @@ public class Home extends ViewInterface {
     @FXML
     private Button btnLogOut;
 
+    //IC
     @FXML
-    public void initialize() {
+    private Button btnAggiungiEvento;
+    @FXML
+    private Button btnAggiungiPadiglione;
+    @FXML
+    private Button btnListaCittadini;
+
+    //Cittadino
+    @FXML
+    private Label codiceLicenza;
+    @FXML
+    private Label scadenzaLicenza;
+    @FXML
+    private Button btnRichiediLicenza;
+
+    @FXML
+    public void initialize() throws SQLException {
         menuPadiglioni.setOnAction(event -> {
             try{
                 controller.setViewAttuale(new ListaPadiglioni(this.controller, stage));
@@ -78,6 +91,17 @@ public class Home extends ViewInterface {
             });
         } else {
             //TODO: Implementare la funzionalità per il cittadino
+            Licenza licenza = controller.getLicenzaCittadino();
+            if(licenza == null) {
+                codiceLicenza.setText("Nessuna licenza");
+                scadenzaLicenza.setText("Nessuna licenza");
+            }else{
+                codiceLicenza.setText(licenza.getCodice());
+                String data_ita = licenza.getScadenza().substring(8, 10) + "/" + licenza.getScadenza().substring(5, 7) + "/" + licenza.getScadenza().substring(0, 4);
+                scadenzaLicenza.setText(data_ita);
+                btnRichiediLicenza.setDisable(true);
+            }
+
         }
 
     }
