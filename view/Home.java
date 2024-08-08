@@ -4,16 +4,18 @@ import controller.Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.Evento;
 import model.Licenza;
+import model.Notifica;
+import model.Utente;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Home extends ViewInterface {
     @FXML
@@ -30,6 +32,14 @@ public class Home extends ViewInterface {
     private Button btnAggiungiPadiglione;
     @FXML
     private Button btnListaCittadini;
+    @FXML
+    private TableColumn<Notifica, String> nomeNotifica;
+    @FXML
+    private TableColumn<Notifica, String> cognomeNotifica;
+    @FXML
+    private TableColumn<Notifica, String> dataNotifica;
+    @FXML
+    private TableView<Notifica> tabellaNotifiche;
 
     //Cittadino
     @FXML
@@ -65,7 +75,7 @@ public class Home extends ViewInterface {
             }
         });
 
-        if(this.controller.isAmministratore()) {
+        if(this.controller.isAmministratore()) {    //IC
             btnAggiungiPadiglione.setOnAction(event -> {
                 try {
                     controller.setViewAttuale(new AggiungiPadiglione(this.controller, stage));
@@ -89,17 +99,73 @@ public class Home extends ViewInterface {
                     throw new RuntimeException(e);
                 }
             });
-        } else {
-            //TODO: Implementare la funzionalità per il cittadino
+
+            nomeNotifica.setCellValueFactory(new PropertyValueFactory<>("nome"));
+            cognomeNotifica.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+            dataNotifica.setCellValueFactory(new PropertyValueFactory<>("data"));
+
+            ArrayList<Notifica> notifiche = controller.getNotificheLicenza();
+
+            if(notifiche != null){
+                for(Notifica n : notifiche){
+                    //recupera i dati dell'utente
+                    Utente utente = controller.getUtente(n.getId_utente());
+                    n.setNome(utente.getNome());
+                    n.setCognome(utente.getCognome());
+                    //Data in formato italiano
+                    String data_ita = n.getData().substring(8, 10) + "/" + n.getData().substring(5, 7) + "/" + n.getData().substring(0, 4);
+                    n.setData(data_ita);
+                    //Aggiunge la notifica alla tabella
+                    tabellaNotifiche.getItems().add(n);
+                }
+            }
+
+
+            //Se clicco su una notifica apri la modifica dell'utente
+            tabellaNotifiche.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    try {
+                        controller.setUtenteSelezionato(controller.getUtente(newSelection.getId_utente()));
+                        controller.setViewAttuale(new ModificaCittadino(controller, stage));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+        } else {    //Cittadino
             Licenza licenza = controller.getLicenzaCittadino();
             if(licenza == null) {
                 codiceLicenza.setText("Nessuna licenza");
                 scadenzaLicenza.setText("Nessuna licenza");
+                btnRichiediLicenza.setOnAction(event -> {
+                    try {
+                        if(controller.onRequestLicenza()){
+                            controller.setViewAttuale(new Home(this.controller, stage));
+                        }
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
             }else{
                 codiceLicenza.setText(licenza.getCodice());
                 String data_ita = licenza.getScadenza().substring(8, 10) + "/" + licenza.getScadenza().substring(5, 7) + "/" + licenza.getScadenza().substring(0, 4);
                 scadenzaLicenza.setText(data_ita);
-                btnRichiediLicenza.setDisable(true);
+                btnRichiediLicenza.setText("Richiedi Rinnovo");
+                //Controllo se la licenza è scaduta confrontando la data di scadenza con la data attuale
+                if(controller.isLicenzaScaduta(licenza)){
+                    btnRichiediLicenza.setOnAction(event -> {
+                        try {
+                            if(controller.onRequestLicenza()){
+                                controller.setViewAttuale(new Home(this.controller, stage));
+                            }
+                        } catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }else{
+                    btnRichiediLicenza.setDisable(true);
+                }
             }
 
         }

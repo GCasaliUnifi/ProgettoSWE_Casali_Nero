@@ -1,13 +1,8 @@
 package controller;
 
 import dao.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
-import model.Evento;
-import model.Licenza;
-import model.Padiglione;
-import model.Utente;
+import model.*;
 import view.Home;
 import view.LogIn;
 import view.ViewInterface;
@@ -18,7 +13,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -271,6 +265,11 @@ public class Controller {
         }
     }
 
+    public Utente getUtente(int id_utente) throws SQLException {
+        UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
+        return utenteDAO.readUtente(id_utente);
+    }
+
     public boolean onUpdateUtente(int id, String nome, String cognome, String email, String telefono, String password, boolean type) throws SQLException {
         UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
         Utente u = utenteDAO.readUtente(id);
@@ -328,6 +327,7 @@ public class Controller {
 
         if(l == null) {
             if(licenzaDAO.createLicenza(licenza)) {
+                removeNotificaLicenzaCittadino();
                 System.out.println("Licenza aggiunta con successo!");
                 return true;
             }
@@ -355,6 +355,7 @@ public class Controller {
         licenza.setId(id);
         LicenzaDAO licenzaDAO = new LicenzaDAOImpl();
         if(licenzaDAO.updateLicenza(licenza)) {
+            removeNotificaLicenzaCittadino();
             System.out.println("Licenza aggiornata con successo!");
             return true;
         } else {
@@ -362,4 +363,91 @@ public class Controller {
         }
     }
 
+    public boolean onRequestLicenza() throws SQLException {
+        Notifica notifica = new Notifica(0, utente.getId(), null);
+        NotificaDAO notificaDAO = new NotificaDAOImpl(notifica);
+        ArrayList<Notifica> n = notificaDAO.readNotifiche(utente.getId());
+        if(n != null) {
+            for(Notifica not : n) {
+                if(not.getTipo() == 0 && not.getStato() == 0) {
+                    System.out.println("Richiesta licenza già inviata!");
+                    this.alert(AlertType.WARNING, "Richiesta licenza già inviata!");
+                    return false;
+                }
+            }
+        }
+
+        if(notificaDAO.createNotifica(notifica)) {
+            System.out.println("Richiesta licenza inviata con successo!");
+            this.alert(AlertType.INFORMATION, "Richiesta licenza inviata con successo!");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean isLicenzaScaduta(Licenza licenza) {
+        String[] dataScadenza = licenza.getScadenza().split("-");
+        int anno = Integer.parseInt(dataScadenza[0]);
+        int mese = Integer.parseInt(dataScadenza[1]);
+        int giorno = Integer.parseInt(dataScadenza[2]);
+        java.util.Date data = new java.util.Date();
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.setTime(data);
+        int annoAttuale = cal.get(java.util.Calendar.YEAR);
+        int meseAttuale = cal.get(java.util.Calendar.MONTH) + 1;
+        int giornoAttuale = cal.get(java.util.Calendar.DAY_OF_MONTH);
+        if(anno < annoAttuale) {
+            return true;
+        } else if(anno == annoAttuale) {
+            if(mese < meseAttuale) {
+                return true;
+            } else if(mese == meseAttuale) {
+                if(giorno < giornoAttuale) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //NOTIFICA
+    public ArrayList<Notifica> getNotificheLicenza() throws SQLException {
+        NotificaDAO notificaDAO = new NotificaDAOImpl(new Notifica(0, 0, null));
+        ArrayList<Notifica> lista;
+
+        lista = notificaDAO.readAllNotifiche();
+        if(!lista.isEmpty()) {
+            //crea una lista di notifiche di tipo 0
+            ArrayList<Notifica> listaLicenze = new ArrayList<Notifica>();
+            for(Notifica n : lista) {
+                if(n.getTipo() == 0 && n.getStato() == 0) {
+                    listaLicenze.add(n);
+                }
+            }
+            return listaLicenze;
+        } else {
+            return null;
+        }
+    }
+
+    public void removeNotificaLicenzaCittadino(){
+        //recupera le notifiche di tipo 0 del cittadino selezionato
+        NotificaDAO notificaDAO = new NotificaDAOImpl(new Notifica(0, 0, null));
+        ArrayList<Notifica> lista;
+        try {
+            lista = notificaDAO.readNotifiche(utenteSelezionato.getId());
+            if(!lista.isEmpty()) {
+                for(Notifica n : lista) {
+                    if(n.getTipo() == 0) {
+                        notificaDAO.deleteNotifica(n.getId());
+                    }
+                }
+            }else{
+                System.out.println("Nessuna notifica da eliminare");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
