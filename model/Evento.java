@@ -6,6 +6,7 @@ public class Evento {
     private String nome;
     private String data;
     private String descrizione;
+    private int posti;
 
     public Evento(String codice, String nome, String data, String descrizione) {
         this.codice = codice;
@@ -52,5 +53,13 @@ public class Evento {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    public int getPosti() {
+        return posti;
+    }
+
+    public void setPosti(int posti) {
+        this.posti = posti;
     }
 }

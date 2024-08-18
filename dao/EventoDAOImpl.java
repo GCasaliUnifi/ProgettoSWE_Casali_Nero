@@ -36,6 +36,21 @@ public class EventoDAOImpl extends DataBaseConnector implements EventoDAO{
 
     @Override
     public Evento readEvento(int id) throws SQLException {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM evento WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                Evento ev = new Evento(rs.getString("codice"), rs.getString("nome"), rs.getString("data"), rs.getString("descrizione"));
+                ev.setId(rs.getInt("id"));
+                ev.setPosti(rs.getInt("posti"));
+                return ev;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 
@@ -49,6 +64,7 @@ public class EventoDAOImpl extends DataBaseConnector implements EventoDAO{
             if(rs.next()) {
                 Evento ev = new Evento(rs.getString("codice"), rs.getString("nome"), rs.getString("data"), rs.getString("descrizione"));
                 ev.setId(rs.getInt("id"));
+                ev.setPosti(rs.getInt("posti"));
                 return ev;
             }
         } catch (SQLException e) {
@@ -72,6 +88,7 @@ public class EventoDAOImpl extends DataBaseConnector implements EventoDAO{
                 data = dataSplit[2] + "/" + dataSplit[1] + "/" + dataSplit[0];
                 Evento ev = new Evento(rs.getString("codice"), rs.getString("nome"), data, rs.getString("descrizione"));
                 ev.setId(rs.getInt("id"));
+                ev.setPosti(rs.getInt("posti"));
                 eventi.add(ev);
             }
 
@@ -88,12 +105,13 @@ public class EventoDAOImpl extends DataBaseConnector implements EventoDAO{
     public boolean updateEvento(Evento evento) throws SQLException {
         try{
             Connection connection = getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE evento SET codice = ?, nome = ?, data = ?, descrizione = ? WHERE id = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE evento SET codice = ?, nome = ?, data = ?, descrizione = ?, posti = ? WHERE id = ?");
             preparedStatement.setString(1, evento.getCodice());
             preparedStatement.setString(2, evento.getNome());
             preparedStatement.setDate(3, Date.valueOf(evento.getData()));
             preparedStatement.setString(4, evento.getDescrizione());
-            preparedStatement.setInt(5, evento.getId());
+            preparedStatement.setInt(5, evento.getPosti());
+            preparedStatement.setInt(6, evento.getId());
 
             if(preparedStatement.executeUpdate() > 0) {
                 return true;

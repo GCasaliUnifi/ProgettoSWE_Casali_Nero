@@ -75,15 +75,16 @@ public class ListaEventi extends ViewInterface{
                 System.out.println("Evento selezionato: "+newSelection.getId());
                 Evento ev = new Evento(newSelection.getCodice(), newSelection.getNome(), newSelection.getData(), newSelection.getDescrizione());
                 ev.setId(newSelection.getId());
+                ev.setPosti(newSelection.getPosti());
                 controller.setEventoSelezionato(ev);
                 try{
                     if(controller.isAmministratore()){
                         controller.setViewAttuale(new ModificaEvento(this.controller, stage));
                     }else{
-                        System.out.println("Implementare vista per Cittadino");
+                        controller.setViewAttuale(new PrenotaEvento(this.controller, stage));
                     }
                 } catch (Exception e) {
-                    throw new RuntimeException(e);
+                    System.out.println("Errore durante il caricamento della finestra di modifica/prenotazione evento: "+e.getMessage());
                 }
             }
         });

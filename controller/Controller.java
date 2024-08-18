@@ -86,7 +86,7 @@ public class Controller {
         try {
             viewAttuale.display();
         } catch (IOException e) {
-            throw new Exception("Errore nel caricamento della finestra");
+            System.out.println("Errore nella visualizzazione della finestra: " + e.getMessage());
         }
     }
 
@@ -249,6 +249,11 @@ public class Controller {
         }else{
             return false;
         }
+    }
+
+    public Evento getEvento(int id) throws SQLException {
+        EventoDAO eventoDAO = new EventoDAOImpl();
+        return eventoDAO.readEvento(id);
     }
 
     //UTENTE
