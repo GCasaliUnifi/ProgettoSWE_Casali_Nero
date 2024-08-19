@@ -5,6 +5,7 @@ import javafx.stage.Stage;
 import model.*;
 import view.Home;
 import view.LogIn;
+import view.PrenotaEvento;
 import view.ViewInterface;
 
 import java.io.IOException;
@@ -254,6 +255,45 @@ public class Controller {
     public Evento getEvento(int id) throws SQLException {
         EventoDAO eventoDAO = new EventoDAOImpl();
         return eventoDAO.readEvento(id);
+    }
+
+    public String generaCampo(int codiceCampo){
+        String campo = "";
+        String[] valori = switch (codiceCampo) {
+            case 0 -> //Ritornerà un nome casuale
+                    new String[]{"Marco", "Luca", "Andrea", "Matteo", "Giovanni", "Alessandro", "Davide", "Michele", "Lorenzo", "Francesco", "Riccardo", "Simone", "Antonio", "Fabio", "Giuseppe", "Paolo", "Federico", "Stefano", "Alberto", "Claudio", "Roberto", "Giorgio", "Massimo", "Gianluca", "Gianmarco", "Gianfranco", "Giancarlo", "Gianpaolo", "Gianandrea", "Gianantonio", "Gianmichele", "Gianfrancesco", "Gianstefano", "Gianalberto", "Gianclaudio", "Gianroberto", "Giangiuseppe", "Gianpaolo", "Gianfederico", "Gianstefano", "Gianalberto", "Gianclaudio", "Gianroberto", "Giangiuseppe", "Gianpaolo", "Gianfederico", "Gianstefano", "Gianalberto", "Gianclaudio", "Gianroberto", "Giangiuseppe", "Gianpaolo", "Gianfederico", "Gianstefano", "Gianalberto", "Gianclaudio", "Gianroberto", "Giangiuseppe", "Gianpaolo", "Gianfederico", "Gianstefano", "Gianalberto", "Gianclaudio", "Gianroberto", "Giangiuseppe", "Gianpaolo", "Gianfederico", "Gianstefano", "Gianalberto", "Gianclaudio", "Gianroberto", "Giangiuseppe", "Gianpaolo", "Gianfederico", "Gianstefano", "Gianalberto", "Gianclaudio", "Gianroberto", "Giangiuseppe", "Gianpaolo", "Gianfederico", "Gianstefano", "Gianalberto", "Gianclaudio"};
+            case 1 -> //Ritornerà un cognome casuale
+                //cognomi italiani più comuni
+                    new String[]{"Rossi", "Russo", "Ferrari", "Esposito", "Bianchi", "Romano", "Colombo", "Ricci", "Marino", "Greco", "Bruno", "Gallo", "Conti", "De Luca", "Mancini", "Costa", "Giordano", "Rizzo", "Lombardi", "Moretti", "Barbieri", "Fontana", "Santoro", "Mariani", "Rinaldi", "Caruso", "Ferrara", "Galli", "Martini", "Leone", "Longo", "Gentile", "Martinelli", "Vitale", "Lombardo", "Serra", "Coppola", "De Santis", "D'Angelo", "Marchetti", "Parisi", "Villa", "Conte", "Ferraro", "Ferri", "Fabbri", "Bianco", "Marini", "Grasso", "Valentini", "Messina", "Sala", "De Angelis", "Gatti", "Pellegrini", "Palumbo", "Sanna", "Farina", "Rizzi", "Monti", "Cattaneo", "Morelli", "Amato", "Silvestri", "Mazza", "Testa", "Grassi", "Pellegrino", "Carbone", "Giuliani", "Benedetti", "Barone", "Rossetti", "Caputo", "Montanari", "Guerra", "Palmieri", "Bernardi", "Martino", "Fiore", "De Rosa", "Ferretti", "Bellini", "Basile", "Riva", "Donati", "Piras", "Vitali", "Battaglia", "Sartori", "Neri", "Costantini", "Milani", "Pagano", "Ruggiero", "Sorrentino", "D'Amico", "Orlando", "Damico", "Negri", "Poli", "D'Agostino", "Fioretti", "Coppola", "Piras", "Vitali", "Battaglia", "Sartori", "Neri", "Costantini", "Milani"};
+            case 2 -> //Ritornerà un codice fiscale casuale
+                    new String[]{"RSSMRC97A01A007D", "GLLSRN96R49A132H", "FRRMRA97A01A007D", "SPTGPP97A01A007D", "BNCBNC97A01A007D", "RMMRNN97A01A007D", "CLMBBR97A01A007D", "RCCMRC97A01A007D", "MRRNMR97A01A007D", "GRCGRC97A01A007D", "BRNBRN97A01A007D", "GLLGRC97A01A007D", "CNTCNT97A01A007D", "DLCLCC97A01A007D", "MNCCST97A01A007D", "CSTCST97A01A007D", "GRDNDR97A01A007D", "RZZRZZ97A01A007D", "LMBRDI97A01A007D", "MRTMRT97A01A007D", "LNGLMB97A01A007D", "MRTNLL97A01A007D", "BRRBRR97A01A007D", "FNTFNT97A01A007D", "SNTRSN97A01A007D", "MRNMRN97A01A007D", "RLNRLN97A01A007D", "CRSCRS97A01A007D", "FRRFRR97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT87N12A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D", "MRTMRT97A01A007D", "LMBRDO97A01A007D", "LNGGNT97A01A007D", "GNTGNT97A01A007D"};
+            default -> null;
+        };
+        if(valori != null){
+            //genera un numero casuale tra 0 e la lunghezza di valori
+            int random = (int) (Math.random() * valori.length);
+            //assegna a campo il valore casuale
+            campo = valori[random];
+        }
+        return campo;
+    }
+
+    public void onPrenotaEvento(String nome, String cognome, String codf) throws SQLException {
+        Biglietto biglietto = new Biglietto(nome, cognome, codf);
+        BigliettoDAO bigliettoDAO = new BigliettoDAOImpl();
+        if(bigliettoDAO.readBigliettoUtenteEvento(utente.getId(), eventoSelezionato.getId()) >= 2) {
+            System.out.println("Questo utente possiede già 2 biglietti per questo evento");
+            this.alert(AlertType.ERROR, "Non puoi acquistare più di 2 biglietti per questo evento");
+            return;
+        }
+        biglietto.setIdUtente(utente.getId());
+        biglietto.setIdEvento(eventoSelezionato.getId());
+        if(bigliettoDAO.createBiglietto(biglietto)) {
+            System.out.println("Prenotazione effettuata con successo!");
+            this.alert(AlertType.CONFIRMATION, "Prenotazione effettuata con successo!");
+        } else {
+            this.alert(AlertType.ERROR, "I biglietti disponibili per questo evento sono terminati");
+        }
     }
 
     //UTENTE

@@ -6,15 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.Evento;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class PrenotaEvento extends ViewInterface{
+public class Biglietto extends ViewInterface{
     @FXML
     private MenuItem menuHome;
     @FXML
@@ -23,17 +23,17 @@ public class PrenotaEvento extends ViewInterface{
     private MenuItem menuPadiglioni;
 
     @FXML
-    private ImageView imgEvento;
+    private TextField nomeBiglietto;
     @FXML
-    private TextField nomeEvento;
+    private TextField cognomeBiglietto;
     @FXML
-    private TextField dataEvento;
-    @FXML
-    private TextArea descrizioneEvento;
-    @FXML
-    private TextField bigliettiDisponibili;
+    private TextField codfBiglietto;
     @FXML
     private Button btnPrenota;
+    @FXML
+    private Button btnGenera;
+    @FXML
+    private Button btnCancel;
 
     @FXML
     public void initialize() throws SQLException {
@@ -67,32 +67,40 @@ public class PrenotaEvento extends ViewInterface{
             }
         });
 
-        try {
-            Image image = new Image("img/sagra_italiana.jpg");
-            imgEvento.setImage(image);
-            imgEvento.setFitWidth(250);
-            imgEvento.setPreserveRatio(true);
-        } catch (Exception e) {
-            System.out.println("Errore nel caricamento dell'immagine: " + e.getMessage());
-        }
-        nomeEvento.setText(controller.getEventoSelezionato().getNome());
-        dataEvento.setText(controller.getEventoSelezionato().getData());
-        descrizioneEvento.setText(controller.getEventoSelezionato().getDescrizione());
-        Evento evento = controller.getEvento(controller.getEventoSelezionato().getId());
-        bigliettiDisponibili.setText(String.valueOf(evento.getPosti()));
-
         btnPrenota.setOnAction(e -> {
             try {
-                System.out.println("Prenota evento");
-                controller.setViewAttuale(new Biglietto(controller, stage));
-            } catch (Exception ex) {
+                if(!nomeBiglietto.getText().isEmpty() && !cognomeBiglietto.getText().isEmpty() && !codfBiglietto.getText().isEmpty()){
+                    controller.onPrenotaEvento(nomeBiglietto.getText(), cognomeBiglietto.getText(), codfBiglietto.getText());
+                    controller.setViewAttuale(new ListaEventi(controller, stage));
+                }else{
+                    controller.alert(Alert.AlertType.ERROR, "Inserire tutti i campi");
+                }
+            } catch (SQLException ex) {
                 ex.printStackTrace();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        btnGenera.setOnAction(e -> {
+            nomeBiglietto.setText(controller.generaCampo(0));
+            cognomeBiglietto.setText(controller.generaCampo(1));
+            codfBiglietto.setText(controller.generaCampo(2));
+        });
+
+        btnCancel.setOnAction(e -> {
+            try {
+                controller.setViewAttuale(new ListaEventi(controller, stage));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
         });
     }
 
-    public PrenotaEvento(Controller c, Stage stage) {
-        super(c, "Prenota Evento", "fxml/PrenotaEvento.fxml");
+    public Biglietto(Controller c, Stage stage) {
+        super(c, "Biglietto", "fxml/Biglietto.fxml");
         ViewInterface.stage = stage;
     }
 
@@ -107,7 +115,7 @@ public class PrenotaEvento extends ViewInterface{
             stage.setTitle(title);
             stage.show();
         } catch (IOException e) {
-            throw new IOException("Errore nel caricamento della finestra di Prenotazione evento: "+e.getMessage());
+            throw new IOException("Errore nel caricamento della finestra del Biglietto: "+e.getMessage());
         }
     }
 }
