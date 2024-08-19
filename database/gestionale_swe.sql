@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Ago 11, 2024 alle 00:04
+-- Creato il: Ago 19, 2024 alle 16:32
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `gestionale_swe`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `biglietto`
+--
+
+CREATE TABLE `biglietto` (
+  `id` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `nome` text NOT NULL,
+  `cognome` text NOT NULL,
+  `codf` text NOT NULL,
+  `data_prenotazione` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `biglietto`
+--
+
+INSERT INTO `biglietto` (`id`, `id_evento`, `id_user`, `nome`, `cognome`, `codf`, `data_prenotazione`) VALUES
+(1, 2, 3, 'Gianfederico', 'Milani', 'RLNRLN97A01A007D', '2024-08-19'),
+(2, 2, 3, 'Claudio', 'Palmieri', 'LMBRDO97A01A007D', '2024-08-19'),
+(3, 4, 3, 'Giancarlo', 'D\'Angelo', 'MRTMRT97A01A007D', '2024-08-19');
 
 -- --------------------------------------------------------
 
@@ -41,8 +66,8 @@ CREATE TABLE `evento` (
 --
 
 INSERT INTO `evento` (`id`, `codice`, `nome`, `data`, `descrizione`, `posti`) VALUES
-(2, 'E_01', 'Fiera dei giochi', '2024-08-10', 'Questa è la descrizione per la fiera dei giochi!\nIngresso Gratuito per i luogotenenti.', 100),
-(4, 'E_03', 'Sagra del tartufo', '2024-08-31', 'Questa sagra sarà piena di funghi.\nIngresso gratuito per tutti.', 100);
+(2, 'E_01', 'Fiera dei giochi', '2024-08-10', 'Questa è la descrizione per la fiera dei giochi!\nIngresso Gratuito per i luogotenenti.', 98),
+(4, 'E_03', 'Sagra del tartufo', '2024-08-31', 'Questa sagra sarà piena di funghi.\nIngresso gratuito per tutti.', 99);
 
 -- --------------------------------------------------------
 
@@ -128,6 +153,12 @@ INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `cellphone`, `psw`, 
 --
 
 --
+-- Indici per le tabelle `biglietto`
+--
+ALTER TABLE `biglietto`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indici per le tabelle `evento`
 --
 ALTER TABLE `evento`
@@ -161,6 +192,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT per le tabelle scaricate
 --
+
+--
+-- AUTO_INCREMENT per la tabella `biglietto`
+--
+ALTER TABLE `biglietto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `evento`
