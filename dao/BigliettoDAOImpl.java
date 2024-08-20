@@ -48,7 +48,32 @@ public class BigliettoDAOImpl extends DataBaseConnector implements BigliettoDAO 
     }
 
     @Override
-    public ArrayList<Biglietto> readAllBiglietti(int id_evento) {
+    public ArrayList<Biglietto> readAllBigliettiEvento(int id_evento) {
+        return null;
+    }
+
+
+    @Override
+    public ArrayList<Biglietto> readAllBigliettiUtente(int id_utente) {
+        try{
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT biglietto.id AS id, biglietto.nome AS nome, biglietto.cognome AS cognome, biglietto.codf AS codf, biglietto.id_evento AS id_evento, biglietto.id_user AS id_user, biglietto.data_prenotazione AS data_prenotazione, evento.nome AS nome_evento FROM biglietto, evento WHERE biglietto.id_evento=evento.id AND id_user = ?");
+            preparedStatement.setInt(1, id_utente);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<Biglietto> biglietti = new ArrayList<>();
+            while(resultSet.next()){
+                Biglietto biglietto = new Biglietto(resultSet.getString("nome"), resultSet.getString("cognome"), resultSet.getString("codf"));
+                biglietto.setId(resultSet.getInt("id"));
+                biglietto.setIdEvento(resultSet.getInt("id_evento"));
+                biglietto.setIdUtente(resultSet.getInt("id_user"));
+                biglietto.setNomeEvento(resultSet.getString("nome_evento"));
+                biglietto.setDataPrenotazione(resultSet.getString("data_prenotazione"));
+                biglietti.add(biglietto);
+            }
+            return biglietti;
+        }catch (Exception e){
+            System.out.println("Errore in readAllBigliettiUtente: "+e.getMessage());
+        }
         return null;
     }
 

@@ -7,6 +7,8 @@ public class Biglietto {
     private String nome;
     private String cognome;
     private String codiceFiscale;
+    private String nomeEvento;
+    private String dataPrenotazione;
 
     public Biglietto(String nome, String cognome, String codiceFiscale) {
         this.nome = nome;
@@ -60,5 +62,21 @@ public class Biglietto {
 
     public void setCodiceFiscale(String codiceFiscale) {
         this.codiceFiscale = codiceFiscale;
+    }
+
+    public String getNomeEvento() {
+        return nomeEvento;
+    }
+
+    public void setNomeEvento(String nomeEvento) {
+        this.nomeEvento = nomeEvento;
+    }
+
+    public String getDataPrenotazione() {
+        return dataPrenotazione;
+    }
+
+    public void setDataPrenotazione(String dataPrenotazione) {
+        this.dataPrenotazione = dataPrenotazione;
     }
 }

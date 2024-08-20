@@ -25,6 +25,7 @@ public class Controller {
     private Padiglione padiglioneSelezionato;
     private Evento eventoSelezionato;
     private Utente utenteSelezionato;
+    private Biglietto bigliettoSelezionato;
 
     public Controller(Stage stage) throws Exception {
         this.utente = null;
@@ -54,6 +55,14 @@ public class Controller {
 
     public Utente getUtenteSelezionato() {
         return this.utenteSelezionato;
+    }
+
+    public void setBigliettoSelezionato(Biglietto biglietto) {
+        this.bigliettoSelezionato = biglietto;
+    }
+
+    public Biglietto getBigliettoSelezionato() {
+        return this.bigliettoSelezionato;
     }
 
     private String getSecurePassword(String clearPsw) {
@@ -493,6 +502,19 @@ public class Controller {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    //CITTADINO
+    public ArrayList<Biglietto> getBigliettiCittadino() throws SQLException {
+        BigliettoDAO bigliettoDAO = new BigliettoDAOImpl();
+        ArrayList<Biglietto> lista;
+        lista = bigliettoDAO.readAllBigliettiUtente(utente.getId());
+
+        if(!lista.isEmpty()) {
+            return lista;
+        } else {
+            return null;
         }
     }
 }

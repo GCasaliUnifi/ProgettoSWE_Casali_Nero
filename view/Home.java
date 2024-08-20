@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.Biglietto;
 import model.Evento;
 import model.Licenza;
 import model.Notifica;
@@ -48,6 +49,14 @@ public class Home extends ViewInterface {
     private Label scadenzaLicenza;
     @FXML
     private Button btnRichiediLicenza;
+    @FXML
+    private TableColumn<Biglietto, String> eventoBiglietto;
+    @FXML
+    private TableColumn<Biglietto, String> nomeBiglietto;
+    @FXML
+    private TableColumn<Biglietto, String> cognomeBiglietto;
+    @FXML
+    private TableView<Biglietto> tabellaBiglietti;
 
     @FXML
     public void initialize() throws SQLException {
@@ -168,6 +177,29 @@ public class Home extends ViewInterface {
                 }
             }
 
+            eventoBiglietto.setCellValueFactory(new PropertyValueFactory<>("nomeEvento"));
+            nomeBiglietto.setCellValueFactory(new PropertyValueFactory<>("nome"));
+            cognomeBiglietto.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+
+            ArrayList<Biglietto> biglietti = controller.getBigliettiCittadino();
+
+            if (biglietti != null) {
+                for (Biglietto b : biglietti) {
+                    tabellaBiglietti.getItems().add(b);
+                }
+            }
+
+            //Se clicco su un biglietto apro la modifica dell'utente
+            tabellaBiglietti.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    try {
+                        controller.setBigliettoSelezionato(newSelection);
+                        controller.setViewAttuale(new DettagliBiglietto(controller, stage));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
         }
 
     }
