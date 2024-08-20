@@ -1,235 +1,234 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+/*!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19  Distrib 10.11.8-MariaDB, for Linux (x86_64)
 --
--- Host: localhost
--- Creato il: Ago 19, 2024 alle 16:32
--- Versione del server: 10.4.28-MariaDB
--- Versione PHP: 8.2.4
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: gestionale_swe
+-- ------------------------------------------------------
+-- Server version	10.11.8-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Database: `gestionale_swe`
+-- Table structure for table `biglietto`
 --
 
--- --------------------------------------------------------
-
---
--- Struttura della tabella `biglietto`
---
-
+DROP TABLE IF EXISTS `biglietto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `biglietto` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_evento` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `nome` text NOT NULL,
   `cognome` text NOT NULL,
   `codf` text NOT NULL,
-  `data_prenotazione` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `data_prenotazione` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dump dei dati per la tabella `biglietto`
+-- Dumping data for table `biglietto`
 --
 
-INSERT INTO `biglietto` (`id`, `id_evento`, `id_user`, `nome`, `cognome`, `codf`, `data_prenotazione`) VALUES
-(1, 2, 3, 'Gianfederico', 'Milani', 'RLNRLN97A01A007D', '2024-08-19'),
-(2, 2, 3, 'Claudio', 'Palmieri', 'LMBRDO97A01A007D', '2024-08-19'),
-(3, 4, 3, 'Giancarlo', 'D\'Angelo', 'MRTMRT97A01A007D', '2024-08-19');
-
--- --------------------------------------------------------
+LOCK TABLES `biglietto` WRITE;
+/*!40000 ALTER TABLE `biglietto` DISABLE KEYS */;
+INSERT INTO `biglietto` VALUES
+(1,2,3,'Gianfederico','Milani','RLNRLN97A01A007D','2024-08-19'),
+(2,2,3,'Claudio','Palmieri','LMBRDO97A01A007D','2024-08-19'),
+(3,4,3,'Giancarlo','D\'Angelo','MRTMRT97A01A007D','2024-08-19'),
+(4,4,3,'Luca','Pellegrini','LNGGNT97A01A007D','2024-08-20');
+/*!40000 ALTER TABLE `biglietto` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struttura della tabella `evento`
+-- Table structure for table `evento`
 --
 
+DROP TABLE IF EXISTS `evento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `evento` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `codice` text NOT NULL,
   `nome` text NOT NULL,
   `data` date NOT NULL,
   `descrizione` text NOT NULL,
-  `posti` int(11) NOT NULL DEFAULT 100
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `posti` int(11) NOT NULL DEFAULT 100,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dump dei dati per la tabella `evento`
+-- Dumping data for table `evento`
 --
 
-INSERT INTO `evento` (`id`, `codice`, `nome`, `data`, `descrizione`, `posti`) VALUES
-(2, 'E_01', 'Fiera dei giochi', '2024-08-10', 'Questa è la descrizione per la fiera dei giochi!\nIngresso Gratuito per i luogotenenti.', 98),
-(4, 'E_03', 'Sagra del tartufo', '2024-08-31', 'Questa sagra sarà piena di funghi.\nIngresso gratuito per tutti.', 99);
-
--- --------------------------------------------------------
+LOCK TABLES `evento` WRITE;
+/*!40000 ALTER TABLE `evento` DISABLE KEYS */;
+INSERT INTO `evento` VALUES
+(2,'E_01','Fiera dei giochi','2024-08-10','Questa è la descrizione per la fiera dei giochi!\nIngresso Gratuito per i luogotenenti.',98),
+(4,'E_03','Sagra del tartufo','2024-08-31','Questa sagra sarà piena di funghi.\nIngresso gratuito per tutti.',98);
+/*!40000 ALTER TABLE `evento` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struttura della tabella `licenza`
+-- Table structure for table `licenza`
 --
 
+DROP TABLE IF EXISTS `licenza`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `licenza` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_user` int(11) NOT NULL,
   `codice` text NOT NULL,
-  `scadenza` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `scadenza` date NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `codice` (`codice`) USING HASH
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dump dei dati per la tabella `licenza`
+-- Dumping data for table `licenza`
 --
 
-INSERT INTO `licenza` (`id`, `id_user`, `codice`, `scadenza`) VALUES
-(6, 3, '623910', '2025-08-08');
-
--- --------------------------------------------------------
+LOCK TABLES `licenza` WRITE;
+/*!40000 ALTER TABLE `licenza` DISABLE KEYS */;
+INSERT INTO `licenza` VALUES
+(7,3,'619953','2025-08-20');
+/*!40000 ALTER TABLE `licenza` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struttura della tabella `notifica`
+-- Table structure for table `notifica`
 --
 
+DROP TABLE IF EXISTS `notifica`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notifica` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` int(11) NOT NULL,
   `id_utente` int(11) NOT NULL,
   `data` datetime NOT NULL DEFAULT current_timestamp(),
   `messaggio` text DEFAULT NULL,
-  `stato` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
+  `stato` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Struttura della tabella `padiglione`
+-- Dumping data for table `notifica`
 --
 
+LOCK TABLES `notifica` WRITE;
+/*!40000 ALTER TABLE `notifica` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notifica` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `padiglione`
+--
+
+DROP TABLE IF EXISTS `padiglione`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `padiglione` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `codice` text NOT NULL,
-  `dimensione` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `dimensione` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dump dei dati per la tabella `padiglione`
+-- Dumping data for table `padiglione`
 --
 
-INSERT INTO `padiglione` (`id`, `codice`, `dimensione`) VALUES
-(1, 'PD_01', '60.25'),
-(2, 'PD_02', '85.23');
-
--- --------------------------------------------------------
+LOCK TABLES `padiglione` WRITE;
+/*!40000 ALTER TABLE `padiglione` DISABLE KEYS */;
+INSERT INTO `padiglione` VALUES
+(1,'PD_01','60.25'),
+(2,'PD_02','85.23');
+/*!40000 ALTER TABLE `padiglione` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Struttura della tabella `user`
+-- Table structure for table `padiglione_evento`
 --
 
+DROP TABLE IF EXISTS `padiglione_evento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `padiglione_evento` (
+  `id_evento` int(11) NOT NULL,
+  `id_padiglione` int(11) NOT NULL,
+  `id_utente` int(11) NOT NULL,
+  `tipo` int(11) NOT NULL,
+  KEY `id_evento` (`id_evento`),
+  KEY `id_padiglione` (`id_padiglione`),
+  KEY `id_utente` (`id_utente`),
+  CONSTRAINT `padiglione_evento_ibfk_1` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id`),
+  CONSTRAINT `padiglione_evento_ibfk_2` FOREIGN KEY (`id_padiglione`) REFERENCES `padiglione` (`id`),
+  CONSTRAINT `padiglione_evento_ibfk_3` FOREIGN KEY (`id_utente`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `padiglione_evento`
+--
+
+LOCK TABLES `padiglione_evento` WRITE;
+/*!40000 ALTER TABLE `padiglione_evento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `padiglione_evento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` text NOT NULL,
   `lastName` text NOT NULL,
   `email` text NOT NULL,
   `cellphone` text NOT NULL,
   `psw` text NOT NULL,
-  `type` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `type` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dump dei dati per la tabella `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `firstName`, `lastName`, `email`, `cellphone`, `psw`, `type`) VALUES
-(2, 'Edoardo', 'Nero', 'edoardo@gmail.com', '3669719064', 'd94b80a177cb51935145fed566d48d5bc9fd982b24d271c86b3259a95e786bc34174905efb97d0f16130da807813e20ad52200ddc6969ffd4788fb8f6fb1f557', 1),
-(3, 'Giacomone', 'Casalone', 'giacomo@gmail.com', '3334455678', 'd94b80a177cb51935145fed566d48d5bc9fd982b24d271c86b3259a95e786bc34174905efb97d0f16130da807813e20ad52200ddc6969ffd4788fb8f6fb1f557', 0);
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES
+(2,'Edoardo','Nero','edoardo@gmail.com','3669719064','d94b80a177cb51935145fed566d48d5bc9fd982b24d271c86b3259a95e786bc34174905efb97d0f16130da807813e20ad52200ddc6969ffd4788fb8f6fb1f557',1),
+(3,'Giacomone','Casalone','giacomo@gmail.com','3334455678','d94b80a177cb51935145fed566d48d5bc9fd982b24d271c86b3259a95e786bc34174905efb97d0f16130da807813e20ad52200ddc6969ffd4788fb8f6fb1f557',0);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Indici per le tabelle scaricate
---
-
---
--- Indici per le tabelle `biglietto`
---
-ALTER TABLE `biglietto`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `evento`
---
-ALTER TABLE `evento`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `licenza`
---
-ALTER TABLE `licenza`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `codice` (`codice`) USING HASH;
-
---
--- Indici per le tabelle `notifica`
---
-ALTER TABLE `notifica`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `padiglione`
---
-ALTER TABLE `padiglione`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT per le tabelle scaricate
---
-
---
--- AUTO_INCREMENT per la tabella `biglietto`
---
-ALTER TABLE `biglietto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT per la tabella `evento`
---
-ALTER TABLE `evento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT per la tabella `licenza`
---
-ALTER TABLE `licenza`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT per la tabella `notifica`
---
-ALTER TABLE `notifica`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT per la tabella `padiglione`
---
-ALTER TABLE `padiglione`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT per la tabella `user`
---
-ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-08-20 17:47:27
