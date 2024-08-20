@@ -10,6 +10,7 @@ public interface EventoDAO {
     Evento readEvento(int id) throws SQLException;
     Evento readEvento(String codice) throws SQLException;
     ArrayList<Evento> readAllEventi() throws SQLException;
+    ArrayList<Evento> readAllEventi(int id_padiglione) throws SQLException;
     boolean updateEvento(Evento evento) throws SQLException;
     boolean deleteEvento(int id) throws SQLException;
 }

@@ -237,6 +237,18 @@ public class Controller {
         }
     }
 
+    public ArrayList<Evento> getListaEventiDisponibili(int idPadiglione) throws SQLException {
+        EventoDAO eventoDAO = new EventoDAOImpl();
+        ArrayList<Evento> lista;
+        lista = eventoDAO.readAllEventi(idPadiglione);
+
+        if(!lista.isEmpty()) {
+            return lista;
+        } else {
+            return null;
+        }
+    }
+
     public boolean onUpdateEvento(int id, String codice, String nome, String data, String descrizione) throws SQLException {
         Evento evento = new Evento(codice, nome, data, descrizione);
         evento.setId(id);
@@ -473,7 +485,7 @@ public class Controller {
         lista = notificaDAO.readAllNotifiche();
         if(!lista.isEmpty()) {
             //crea una lista di notifiche di tipo 0
-            ArrayList<Notifica> listaLicenze = new ArrayList<Notifica>();
+            ArrayList<Notifica> listaLicenze = new ArrayList<>();
             for(Notifica n : lista) {
                 if(n.getTipo() == 0 && n.getStato() == 0) {
                     listaLicenze.add(n);

@@ -62,4 +62,9 @@ public class Evento {
     public void setPosti(int posti) {
         this.posti = posti;
     }
+
+    @Override
+    public String toString() {
+        return this.nome + " | " + this.data;
+    }
 }

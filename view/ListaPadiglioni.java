@@ -77,7 +77,7 @@ public class ListaPadiglioni extends ViewInterface{
                     if(controller.isAmministratore()){
                         controller.setViewAttuale(new ModificaPadiglione(this.controller, stage));
                     }else{
-                        System.out.println("Implementare vista per Cittadino");
+                        controller.setViewAttuale(new PrenotaPadiglione(this.controller, stage));
                     }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
