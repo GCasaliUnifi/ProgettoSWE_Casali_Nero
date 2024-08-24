@@ -5,7 +5,6 @@ import javafx.stage.Stage;
 import model.*;
 import view.Home;
 import view.LogIn;
-import view.PrenotaEvento;
 import view.ViewInterface;
 
 import java.io.IOException;
@@ -522,6 +521,28 @@ public class Controller {
         BigliettoDAO bigliettoDAO = new BigliettoDAOImpl();
         ArrayList<Biglietto> lista;
         lista = bigliettoDAO.readAllBigliettiUtente(utente.getId());
+
+        if(!lista.isEmpty()) {
+            return lista;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean onPrenotaPadiglione(int id_evento, int tipo) throws SQLException{
+        PadiglioneEventoDAO padiglioneEventoDAO = new PadiglioneEventoDAOImpl();
+        if(padiglioneEventoDAO.createPadiglioneEvento(id_evento, padiglioneSelezionato.getId(), utente.getId(), tipo)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //Restituisce la lista dei padiglioni prenotati dal Cittadino
+    public ArrayList<PadiglioneEvento> getPadiglioniEvento_Cittadino() throws SQLException {
+        PadiglioneEventoDAO padiglioneEventoDAO = new PadiglioneEventoDAOImpl();
+        ArrayList<PadiglioneEvento> lista;
+        lista = padiglioneEventoDAO.readAllPadiglioniEvento(utente.getId());
 
         if(!lista.isEmpty()) {
             return lista;

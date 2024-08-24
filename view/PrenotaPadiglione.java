@@ -76,7 +76,12 @@ public class PrenotaPadiglione extends ViewInterface {
                     Licenza licenza = controller.getLicenzaCittadino();
                     if(licenza != null) {
                         if(!controller.isLicenzaScaduta(licenza)){
-                            System.out.println("Padiglione prenotato!");
+                            if(controller.onPrenotaPadiglione(eventSelector.getValue().getId(), typeSelector.getItems().indexOf(typeSelector.getValue()))) {
+                                controller.alert(Alert.AlertType.INFORMATION, "Padiglione prenotato con successo");
+                                controller.setViewAttuale(new ListaPadiglioni(controller, stage));
+                            }else{
+                                controller.alert(Alert.AlertType.ERROR, "Errore nella prenotazione del padiglione");
+                            }
                         } else {
                             System.out.println("Licenza scaduta!");
                         }
@@ -84,6 +89,8 @@ public class PrenotaPadiglione extends ViewInterface {
                         System.out.println("Utente non ha licenza!");
                     }
                 } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
             } else {

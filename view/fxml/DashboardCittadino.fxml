@@ -77,10 +77,11 @@
             <Label fx:id="scadenzaLicenza" layoutX="534.0" layoutY="43.0" prefHeight="18.0" prefWidth="98.0" />
             <TitledPane animated="false" collapsible="false" layoutY="179.0" prefHeight="194.0" prefWidth="423.0" text="Padiglioni Affittati">
                <content>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="tabellaPadiglioni" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="eventoPadiglione" prefWidth="172.0" text="EVENTO" />
+                      <TableColumn fx:id="codicePadiglione" prefWidth="109.0" text="PADIGLIONE" />
+                        <TableColumn fx:id="tipologiaPadiglione" prefWidth="140.0" text="TIPOLOGIA" />
                     </columns>
                   </TableView>
                </content>

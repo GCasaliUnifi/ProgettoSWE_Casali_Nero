@@ -8,11 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.*;
 import model.Biglietto;
-import model.Evento;
-import model.Licenza;
-import model.Notifica;
-import model.Utente;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -57,6 +54,14 @@ public class Home extends ViewInterface {
     private TableColumn<Biglietto, String> cognomeBiglietto;
     @FXML
     private TableView<Biglietto> tabellaBiglietti;
+    @FXML
+    private TableColumn<PadiglioneEvento, String> eventoPadiglione;
+    @FXML
+    private TableColumn<PadiglioneEvento, String> codicePadiglione;
+    @FXML
+    private TableColumn<PadiglioneEvento, String> tipologiaPadiglione;
+    @FXML
+    private TableView<PadiglioneEvento> tabellaPadiglioni;
 
     @FXML
     public void initialize() throws SQLException {
@@ -129,7 +134,6 @@ public class Home extends ViewInterface {
                 }
             }
 
-
             //Se clicco su una notifica apri la modifica dell'utente
             tabellaNotifiche.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
                 if (newSelection != null) {
@@ -195,6 +199,29 @@ public class Home extends ViewInterface {
                     try {
                         controller.setBigliettoSelezionato(newSelection);
                         controller.setViewAttuale(new DettagliBiglietto(controller, stage));
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
+
+            eventoPadiglione.setCellValueFactory(new PropertyValueFactory<>("nomeEvento"));
+            codicePadiglione.setCellValueFactory(new PropertyValueFactory<>("codicePadiglione"));
+            tipologiaPadiglione.setCellValueFactory(new PropertyValueFactory<>("tipoPadiglione"));
+
+            ArrayList<PadiglioneEvento> padiglioneEvento = controller.getPadiglioniEvento_Cittadino();
+
+            if (padiglioneEvento != null) {
+                for (PadiglioneEvento pe : padiglioneEvento) {
+                    tabellaPadiglioni.getItems().add(pe);
+                }
+            }
+
+            tabellaPadiglioni.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+                if (newSelection != null) {
+                    try {
+                        System.out.println("Hai cliccato su un PadiglioneEvento");
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }

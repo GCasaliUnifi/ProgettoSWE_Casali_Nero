@@ -1,7 +1,6 @@
 package dao;
 
 import model.Padiglione;
-import model.Utente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,6 +32,19 @@ public class PadiglioneDAOImpl extends DataBaseConnector implements PadiglioneDA
 
     @Override
     public Padiglione readPadiglione(int id) throws SQLException {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from padiglione where id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if(rs.next()) {
+                Padiglione p = new Padiglione(rs.getString("codice"), rs.getFloat("dimensione"));
+                p.setId(rs.getInt("id"));
+                return p;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -100,4 +112,5 @@ public class PadiglioneDAOImpl extends DataBaseConnector implements PadiglioneDA
     public boolean deletePadiglione(int id) throws SQLException {
         return false;
     }
+
 }
