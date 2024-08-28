@@ -35,6 +35,8 @@ public class DettagliBiglietto extends ViewInterface{
     private TextField codfIntestatario;
     @FXML
     private DatePicker dataIntestatario;
+    @FXML
+    private Button btnPrint;
 
     @FXML
     public void initialize() throws SQLException {
@@ -78,6 +80,13 @@ public class DettagliBiglietto extends ViewInterface{
         codfIntestatario.setText(controller.getBigliettoSelezionato().getCodiceFiscale());
         dataIntestatario.setValue(Date.valueOf(controller.getBigliettoSelezionato().getDataPrenotazione()).toLocalDate());
 
+        btnPrint.setOnAction(e -> {
+            try {
+                controller.stampaBigliettoIngresso();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     public DettagliBiglietto(Controller c, Stage stage) {

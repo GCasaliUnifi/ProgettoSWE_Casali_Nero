@@ -550,4 +550,12 @@ public class Controller {
             return null;
         }
     }
+
+    public void stampaBigliettoIngresso() throws Exception {
+        if(this.bigliettoSelezionato.generaPDF()){
+            this.alert(AlertType.INFORMATION, "Biglietto generato con successo!");
+        }else{
+            this.alert(AlertType.ERROR, "Errore nella generazione del biglietto!");
+        }
+    }
 }
