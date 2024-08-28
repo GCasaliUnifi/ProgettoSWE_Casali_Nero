@@ -84,7 +84,7 @@ public class DettagliBiglietto extends ViewInterface{
             try {
                 controller.stampaBigliettoIngresso();
             } catch (Exception ex) {
-                throw new RuntimeException(ex);
+                System.out.println("Errore durante la stampa del biglietto: "+ex.getMessage());
             }
         });
     }

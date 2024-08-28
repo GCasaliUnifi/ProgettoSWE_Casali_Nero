@@ -147,7 +147,7 @@ public class Biglietto implements GeneraPDF {
         ImageIO.write(image, "png", baos);
         byte[] imageBytes = baos.toByteArray();
         Image barcodeImage = new Image(pdf, new ByteArrayInputStream(imageBytes), ImageType.PNG);
-        barcodeImage.setPosition((page.getWidth() - barcodeImage.getWidth()) / 2, 350f);
+        barcodeImage.setPosition((page.getWidth() - barcodeImage.getWidth()) / 2, 550f);
         barcodeImage.drawOn(page);
 
         try{
