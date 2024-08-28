@@ -13,6 +13,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -371,6 +372,10 @@ public class Controller {
         }
     }
 
+    public void onScanBarcode() {
+        //TODO: implementare la scansione del barcode
+    }
+
     //LICENZA
 
     public Licenza getLicenzaCittadino() throws SQLException {
@@ -538,7 +543,6 @@ public class Controller {
         }
     }
 
-    //Restituisce la lista dei padiglioni prenotati dal Cittadino
     public ArrayList<PadiglioneEvento> getPadiglioniEvento_Cittadino() throws SQLException {
         PadiglioneEventoDAO padiglioneEventoDAO = new PadiglioneEventoDAOImpl();
         ArrayList<PadiglioneEvento> lista;
@@ -556,6 +560,27 @@ public class Controller {
             this.alert(AlertType.INFORMATION, "Biglietto generato con successo!");
         }else{
             this.alert(AlertType.ERROR, "Errore nella generazione del biglietto!");
+        }
+    }
+
+    //IC
+    public void onVerifyBiglietto(String codice) throws SQLException {
+        String[] codici = codice.split("-");
+        int id_evento = Integer.parseInt(codici[0]);
+        String codf = codici[1];
+        BigliettoDAO bigliettoDAO = new BigliettoDAOImpl();
+        Biglietto biglietto = bigliettoDAO.readBiglietto(id_evento);
+        if(biglietto != null) {
+            if(Objects.equals(biglietto.getCodiceFiscale().toUpperCase(), codf.toUpperCase())) {
+                System.out.println("Biglietto valido!");
+                this.alert(AlertType.INFORMATION, "Biglietto valido!");
+            } else {
+                System.out.println("Biglietto non valido per questo evento!");
+                this.alert(AlertType.ERROR, "Biglietto non valido per questo evento!");
+            }
+        } else {
+            System.out.println("Biglietto non valido!");
+            this.alert(AlertType.ERROR, "Biglietto non valido!");
         }
     }
 }

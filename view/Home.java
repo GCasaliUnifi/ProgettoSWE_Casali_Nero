@@ -38,6 +38,8 @@ public class Home extends ViewInterface {
     private TableColumn<Notifica, String> dataNotifica;
     @FXML
     private TableView<Notifica> tabellaNotifiche;
+    @FXML
+    private Button btnScan;
 
     //Cittadino
     @FXML
@@ -145,6 +147,15 @@ public class Home extends ViewInterface {
                     }
                 }
             });
+
+            btnScan.setOnAction(event -> {
+                try {
+                    controller.setViewAttuale(new ScansionaBiglietto(this.controller, stage));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
 
         } else {    //Cittadino
             Licenza licenza = controller.getLicenzaCittadino();

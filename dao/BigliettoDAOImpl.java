@@ -44,6 +44,22 @@ public class BigliettoDAOImpl extends DataBaseConnector implements BigliettoDAO 
 
     @Override
     public Biglietto readBiglietto(int id) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM biglietto WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                Biglietto biglietto = new Biglietto(resultSet.getString("nome"), resultSet.getString("cognome"), resultSet.getString("codf"));
+                biglietto.setId(resultSet.getInt("id"));
+                biglietto.setIdEvento(resultSet.getInt("id_evento"));
+                biglietto.setIdUtente(resultSet.getInt("id_user"));
+                biglietto.setDataPrenotazione(resultSet.getString("data_prenotazione"));
+                return biglietto;
+            }
+        } catch (Exception e) {
+            System.out.println("Errore in createBiglietto: "+e.getMessage());
+        }
         return null;
     }
 
