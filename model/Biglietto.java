@@ -140,6 +140,8 @@ public class Biglietto implements GeneraPDF {
 
         //Barcode
         Barcode barcode = BarcodeFactory.createCode128B(this.id+"-"+this.codiceFiscale);
+        barcode.setBarHeight(60);
+        barcode.setBarWidth(2);
         BufferedImage image = new BufferedImage(barcode.getWidth(), barcode.getHeight()-4, BufferedImage.TYPE_INT_RGB);
         Graphics2D g = (Graphics2D) image.getGraphics();
         barcode.draw(g, 0, 0);
