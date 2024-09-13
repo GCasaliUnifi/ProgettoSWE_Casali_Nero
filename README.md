@@ -27,6 +27,8 @@
   <ul>
     <li><b>Model View Controller (M.V.C.)</li>
     <li><b>Data Access Object (D.A.O.)</li>
+    <li><b>Builder</li>
+    <li><b>Singleton</li>
   </ul>
 </h5>
 
