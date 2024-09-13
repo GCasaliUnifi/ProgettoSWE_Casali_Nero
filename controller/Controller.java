@@ -6,6 +6,7 @@ import model.*;
 import view.Home;
 import view.LogIn;
 import view.ViewInterface;
+import sender.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -317,6 +318,11 @@ public class Controller {
         }
     }
 
+    public int getNumBigliettiPrenotatiEvento() throws SQLException {
+        BigliettoDAO bigliettoDAO = new BigliettoDAOImpl();
+        return bigliettoDAO.readAllBigliettiEvento(eventoSelezionato.getId()).size();
+    }
+
     //UTENTE
 
     public ArrayList<Utente> getListaCittadini() throws SQLException {
@@ -370,10 +376,6 @@ public class Controller {
             this.alert(AlertType.ERROR, "Errore: email già utilizzata!");
             return false;
         }
-    }
-
-    public void onScanBarcode() {
-        //TODO: implementare la scansione del barcode
     }
 
     //LICENZA
@@ -582,5 +584,34 @@ public class Controller {
             System.out.println("Biglietto non valido!");
             this.alert(AlertType.ERROR, "Biglietto non valido!");
         }
+    }
+
+    public boolean inviaEmailBroadcast(String oggetto, String messaggio) {
+
+        //recupera la lista di tutti i biglietti prenotati per l'evento selezionato
+        BigliettoDAO bigliettoDAO = new BigliettoDAOImpl();
+        ArrayList<Biglietto> lista;
+
+        try {
+            lista = bigliettoDAO.readDistinctAllBigliettiEvento(eventoSelezionato.getId());
+            if(!lista.isEmpty()) {
+                for(Biglietto b : lista) {
+                    //recupera l'utente associato al biglietto
+                    UtenteDAO utenteDAO = new UtenteDAOImpl(this.utente);
+                    Utente u = utenteDAO.readUtente(b.getIdUtente());
+                    //invia l'email all'utente
+                    Email email = new Email.EmailBuilder().setTo(u.getEmail()).setSubject(oggetto).setBody(messaggio).build();
+                    EmailService emailService = SMTPEmailService.getInstance();
+                    emailService.sendEmail(email);
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 }

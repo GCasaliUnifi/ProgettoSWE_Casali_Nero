@@ -18,6 +18,14 @@
     -fx-border-radius: 8px;
 }
 
+.action_btn{
+    -fx-background-color: #454545;
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-border-color: #454545;
+    -fx-border-radius: 8px;
+}
+
 .delete_btn{
     -fx-background-color: #dc3545;
     -fx-background-radius: 8px;

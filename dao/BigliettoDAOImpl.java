@@ -65,6 +65,49 @@ public class BigliettoDAOImpl extends DataBaseConnector implements BigliettoDAO 
 
     @Override
     public ArrayList<Biglietto> readAllBigliettiEvento(int id_evento) {
+        try{
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT biglietto.id AS id, biglietto.nome AS nome, biglietto.cognome AS cognome, biglietto.codf AS codf, biglietto.id_evento AS id_evento, biglietto.id_user AS id_user, biglietto.data_prenotazione AS data_prenotazione, evento.nome AS nome_evento FROM biglietto, evento WHERE biglietto.id_evento=evento.id AND evento.id = ?");
+            preparedStatement.setInt(1, id_evento);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<Biglietto> biglietti = new ArrayList<>();
+            while(resultSet.next()){
+                Biglietto biglietto = new Biglietto(resultSet.getString("nome"), resultSet.getString("cognome"), resultSet.getString("codf"));
+                biglietto.setId(resultSet.getInt("id"));
+                biglietto.setIdEvento(resultSet.getInt("id_evento"));
+                biglietto.setIdUtente(resultSet.getInt("id_user"));
+                biglietto.setNomeEvento(resultSet.getString("nome_evento"));
+                biglietto.setDataPrenotazione(resultSet.getString("data_prenotazione"));
+                biglietti.add(biglietto);
+            }
+            return biglietti;
+        }catch (Exception e){
+            System.out.println("Errore in readAllBigliettiEvento: "+e.getMessage());
+        }
+        return null;
+    }
+
+    @Override
+    public ArrayList<Biglietto> readDistinctAllBigliettiEvento(int id_evento) {
+        try{
+            Connection connection = getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT DISTINCT biglietto.id_user FROM biglietto WHERE biglietto.id_evento = ?");
+            preparedStatement.setInt(1, id_evento);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ArrayList<Biglietto> biglietti = new ArrayList<>();
+            while(resultSet.next()){
+                Biglietto biglietto = new Biglietto("nome", "cognome", "codf");
+                biglietto.setId(0);
+                biglietto.setIdEvento(id_evento);
+                biglietto.setIdUtente(resultSet.getInt("id_user"));
+                biglietto.setNomeEvento("evento");
+                biglietto.setDataPrenotazione("data");
+                biglietti.add(biglietto);
+            }
+            return biglietti;
+        }catch (Exception e){
+            System.out.println("Errore in readAllBigliettiEvento: "+e.getMessage());
+        }
         return null;
     }
 

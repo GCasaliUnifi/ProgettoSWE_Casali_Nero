@@ -27,6 +27,8 @@ public class ModificaEvento extends ViewInterface{
     @FXML
     private Label dataEvento;
     @FXML
+    private Label partecipazioniEvento;
+    @FXML
     private TextField nomeEvento;
     @FXML
     private TextArea descrizioneEvento;
@@ -40,6 +42,8 @@ public class ModificaEvento extends ViewInterface{
     private CheckBox confermaEliminazione;
     @FXML
     private Button btnDelete;
+    @FXML
+    private Button btnBroadcast;
 
     @FXML
     public void initialize() throws SQLException {
@@ -75,6 +79,8 @@ public class ModificaEvento extends ViewInterface{
 
         codiceEvento.setText(controller.getEventoSelezionato().getCodice());
         dataEvento.setText(controller.getEventoSelezionato().getData());
+        int numPartecipazioni = controller.getNumBigliettiPrenotatiEvento();
+        partecipazioniEvento.setText(String.valueOf(numPartecipazioni));
         nomeEvento.setText(controller.getEventoSelezionato().getNome());
         descrizioneEvento.setText(controller.getEventoSelezionato().getDescrizione());
 
@@ -126,6 +132,19 @@ public class ModificaEvento extends ViewInterface{
             }
         });
 
+        btnBroadcast.setOnAction(e -> {
+            try {
+                if(numPartecipazioni > 0){
+                    controller.setViewAttuale(new InviaEmail(controller, stage));
+                }else{
+                    controller.alert(Alert.AlertType.WARNING, "Nessun cittadino partecipa all'evento");
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
     }
 
     public ModificaEvento(Controller c, Stage stage) {
