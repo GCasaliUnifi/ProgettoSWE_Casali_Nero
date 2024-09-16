@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    height: 100vh;
+    width: 100%;
+}
+
+.success{
+    background-color: #b4ffb4;
+    color: #2f2f2f;
+}
+
+.error{
+    background-color: #ffb4b4;
+    color: #2f2f2f;
+}

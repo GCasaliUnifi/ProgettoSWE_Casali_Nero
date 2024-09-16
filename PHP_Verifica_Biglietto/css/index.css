@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url("../img/background_logo.png");
+    background-repeat: repeat;
+    background-position: center;
+}
+
+#scanner-container {
+    width: 100%;
+}
+
+.header{
+    background-color: #efefef;
+    color: #282828;
+    font-family: sans-serif;
+    border-bottom: 1px solid #b4b4b4;
+}
+
+.main_btn{
+    background-color: #2b62e3;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.secondary_btn{
+    background-color: #f2f2f2;
+    color: #262626;
+    padding: 14px 20px;
+    border-radius: 15px;
+    border: 1px solid #b4b4b4;
+    cursor: pointer;
+}
+
+.scanner_box{
+    border: 1px solid #b4b4b4;
+    width: 90%;
+    margin: 40px 0;
+    max-width: 400px;
+    height: 300px;
+    border-radius: 15px;
+    backdrop-filter: blur(3px);
+}
